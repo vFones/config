@@ -1,4 +1,3 @@
-# Uq2Mrb27qOP0tijpL0Pdhdvb
 # Used to show right color palette
 	export TERM="xterm-256color"
  
