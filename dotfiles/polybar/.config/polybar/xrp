@@ -1,0 +1,8 @@
+#!/usr/bin/env python3
+
+import requests
+
+r = requests.get('https://min-api.cryptocompare.com/data/price?fsym=XRP&tsyms=EUR');
+price = r.json()
+
+print(price['EUR'])

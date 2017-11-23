@@ -1,0 +1,219 @@
+[colors]
+;My colors are set from .Xresources to match everything else
+
+Transparent = #cc000000
+bg = ${xrdb:color0}
+fg = ${xrdb:color15} 
+
+color0 = ${xrdb:color0}
+color8 = ${xrdb:color8}
+
+color1 = ${xrdb:color1}
+color9 = ${xrdb:color9}
+
+color2 = ${xrdb:color2}
+color10    = ${xrdb:color10}
+
+color3 = ${xrdb:color3}
+color11    = ${xrdb:color11}
+
+color4 = ${xrdb:color4}
+color12    = ${xrdb:color12}
+
+color5 = ${xrdb:color5}
+color13    = ${xrdb:color13}
+
+color6 = ${xrdb:color6}
+color14    = ${xrdb:color14}
+
+color7 = ${xrdb:color7}
+color15    = ${xrdb:color15}
+
+
+
+[bar/top]
+enable-ipc = true
+monitor = eDP1
+width = 100%
+height = 23 
+fixed-center = true
+offset-x = 0%
+offset-y = 0%
+background = ${colors.bg}
+foreground = ${colors.fg}
+
+line-size = 3
+border-bottom-size = 0
+
+padding-left = 0
+padding-right = 0
+
+module-margin-left = 0
+module-margin-right = 0
+
+
+font-0 = Futura Bk BT Book:size=10;0
+font-1 = Material Icons:size=10;2
+font-2 = Termsynu:size=8;0
+font-3 = Siji:pixelsize=10;1
+font-4 = FontAwesome:size=10;0
+
+modules-left = i3 xwindow
+modules-center = date cal
+modules-right = volume redshift backlight wlan test battery bar2
+tray-position = 
+
+[module/xwindow]
+type = internal/xwindow
+label = " %title% "
+format-prefix = " "
+format-prefix-foreground = ${colors.color3}
+label-maxlen = 65
+label-foreground = ${colors.fg}
+
+[module/redshift]
+type = custom/script
+interval = 5
+exec = ~/.config/polybar/redshift.sh
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+pin-workspaces = true
+
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 3;
+ws-icon-3 = 4;
+ws-icon-4 = 10;
+ws-icon-default = 
+
+label-focused = %icon% %name%
+label-focused-foreground = ${colors.color3}
+label-focused-padding = 1
+
+label-unfocused = %icon% %name%
+label-unfocused-foreground = ${colors.fg}
+label-unfocused-padding = 1
+
+label-urgent = %icon% %name%
+label-urgent-padding = 1
+label-urgent-foreground = ${colors.bg}
+label-urgent-background = ${colors.color9}
+
+label-visible = %icon% %name%
+label-visible-foreground = ${colors.fg}
+label-visible-padding = 1
+
+label-mode-padding = 1 
+label-mode-foreground = ${colors.fg}
+
+
+[module/date]
+type = internal/date
+interval = 1
+time = "%H:%M "
+time-alt = "%H:%M:%S "
+format-prefix = "  "
+format-prefix-foreground = ${colors.color5}
+label =  %date% %time%
+format-label-foreground = ${colors.fg}
+format-padding = 1
+
+
+[module/cal]
+type = custom/ipc
+hook-0 = /usr/bin/gsimplecal &
+format = ""
+format-foreground = ${colors.color3}
+
+click-left = polybar-msg -p %pid% hook cal 1
+
+[module/bar2]
+type = custom/ipc
+format = "  "
+format-foreground = ${colors.color5}
+hook-0 = /usr/local/bin/polybar -q -c ~/.config/polybar/custom subtop
+initial = 
+click-left = polybar-msg hook bar2 1
+ 
+[module/backlight]
+type = internal/xbacklight
+format-prefix = " "
+format-prefix-foreground = ${colors.color3}
+label = "%percentage%"
+label-foreground = ${colors.fg}
+format-padding = 1
+
+[module/wlan]
+type = internal/network
+interface = wlp1s0
+interval = 3.0
+label-connected = %local_ip%
+format-connected = <label-connected>
+format-connected-prefix = " "
+format-connected-prefix-foreground = ${colors.color6}
+format-connected-padding = 1
+format-disconnected =" Not Connected"
+format-disconnected-foreground = ${colors.color1}
+
+[module/volume]
+type = internal/volume
+master-mixer = Master
+format-volume = "<label-volume> " 
+label-volume = "%percentage% "
+format-volume-prefix = "  "
+format-volume-prefix-foreground = ${colors.color4}
+label-volume-foreground = ${colors.fg}
+label-prefix-foreground = ${colors.fg}
+format-muted = "<label-muted> "
+format-muted-prefix = "  "
+format-muted-prefix-foreground = ${colors.color7}
+format-muted-foreground = ${colors.fg}
+label-muted = 0
+
+
+
+
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+format-charging = <animation-charging> <label-charging>
+format-discharging = <ramp-capacity> <label-discharging>
+format-full = <ramp-capacity> <label-full>
+
+label-charging= "%percentage% "
+label-discharging ="%percentage% "
+
+label-charging-foreground = ${colors.fg}
+label-discharging-foreground = ${colors.fg}
+label-full-foreground = ${colors.fg}
+ramp-capacity-0 =" "
+ramp-capacity-0-foreground = ${colors.color10}
+ramp-capacity-1 =" "
+ramp-capacity-1-foreground = ${colors.color10}
+ramp-capacity-2 =" "
+ramp-capacity-2-foreground = ${colors.color10}
+ramp-capacity-3 =" "
+ramp-capacity-3-foreground = ${colors.color10}
+ramp-capacity-4 =" "
+ramp-capacity-4-foreground = ${colors.color10} 
+
+
+animation-charging-0 =" "
+animation-charging-0-foreground = ${colors.color10}
+animation-charging-1 =" "
+animation-charging-1-foreground = ${colors.color10}
+animation-charging-2 =" "
+animation-charging-2-foreground = ${colors.color10}
+animation-charging-3 =" "
+animation-charging-3-foreground = ${colors.color10}
+animation-charging-4 =" "
+animation-charging-4-foreground = ${colors.color10}
+animation-charging-framerate = 750
+
+
+
+
+; vim:ft=dosini

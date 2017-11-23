@@ -1,0 +1,140 @@
+[colors]
+;My colors are set from .Xresources to match everything else
+
+Transparent = #cc000000
+bg = ${xrdb:color0}
+fg = ${xrdb:color15} 
+
+color0 = ${xrdb:color0}
+color8 = ${xrdb:color8}
+
+color1 = ${xrdb:color1}
+color9 = ${xrdb:color9}
+
+color2 = ${xrdb:color2}
+color10    = ${xrdb:color10}
+
+color3 = ${xrdb:color3}
+color11    = ${xrdb:color11}
+
+color4 = ${xrdb:color4}
+color12    = ${xrdb:color12}
+
+color5 = ${xrdb:color5}
+color13    = ${xrdb:color13}
+
+color6 = ${xrdb:color6}
+color14    = ${xrdb:color14}
+
+color7 = ${xrdb:color7}
+color15    = ${xrdb:color15}
+
+
+
+
+[bar/subtop]
+enable-ipc = true
+bottom = true
+monitor = eDP1
+width = 100%
+height = 23 
+fixed-center = true
+background = ${colors.bg}
+foreground = ${colors.fg}
+offset-x = 0%
+offset-y = 0%
+line-size = 3
+border-bottom-size = 0
+padding-left = 0
+padding-right = 0
+module-margin-left = 0
+module-margin-right = 0
+
+font-0 = Futura Bk BT Book:size=10;0
+font-1 = Material Icons:size=10;2
+font-2 = Termsynu:size=8;0
+font-3 = Siji:pixelsize=10;1
+font-4 = FontAwesome:size=10;0
+
+modules-left =
+modules-center = mpd
+modules-right = xrp vpncheck usb cpu memory closebar
+
+tray-position = left
+tray-detached = false
+ 
+
+[module/closebar]
+type = custom/ipc
+hook-0 = 
+format = "  "
+format-foreground = ${colors.color1}
+click-left = polybar-msg -p %pid% cmd quit
+
+
+[module/usb]
+type = custom/script
+interval = 300
+exec = ~/.config/polybar/usb
+format-prefix= " "
+format-prefix-foreground = ${colors.color4}
+label = "%output:0:80%"
+format = "<label> "
+
+[module/vpncheck]
+type = custom/script
+exec = pgrep openvpn
+interval = 5
+label = "vpn "
+format-prefix = "  "
+format-prefix-foreground = ${colors.color2}
+
+
+[module/xrp]
+type = custom/script
+interval = 3600
+format = "<label> "
+format-prefix = "  "
+tail = true
+format-prefix-foreground = ${colors.color3}
+exec = ~/.config/polybar/xrp
+
+[module/mpd]
+type = internal/mpd
+format-online = | <icon-random> <icon-prev><icon-seekb><icon-stop><label-time><toggle><icon-seekf><icon-next> <icon-repeat> |
+format-online-overline = ${colors.bg}
+format-online-foreground = ${colors.fg}
+format-online-underline = ${colors.bg}
+format-offline = <label-offline>
+label-offline = " No music playing "
+port = 6601
+host= 127.0.0.1
+
+icon-prev = 
+icon-stop = 
+icon-play = 
+icon-pause = 
+icon-next = 
+icon-seekb = 
+icon-seekf = 
+icon-random = 
+icon-repeat = 
+
+toggle-on-foreground = ${colors.fg}
+toggle-off-foreground = ${colors.color8}
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+label = " %percentage%% "
+format-prefix = " "
+format-prefix-foreground = ${colors.color2}
+
+[module/memory]
+type = internal/memory
+interval = 2
+label = "%percentage_used%% "
+format-prefix = "  "
+format-prefix-foreground = ${colors.color6}
+
+; vim:ft=dosini
