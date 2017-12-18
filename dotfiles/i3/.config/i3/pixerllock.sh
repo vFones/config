@@ -1,15 +1,29 @@
-#!/bin/sh
+#!/bin/bash
 
-xbacklight -set 0%
+letterEnteredColor=d23c3dff
+letterRemovedColor=d23c3dff
+passwordCorrect=00000000
+passwordIncorrect=d23c3dff
+background=00000000
+foreground=ffffffff
+rectangles="rectangle 24,734 324,660"
+
+#xbacklight -set 0%
 xwobf /tmp/.i3lock.png
+TMPBG=/tmp/.i3lock.png
 
-i3lock -i /tmp/.i3lock.png --clock --indicator -f \
-	--insidecolor=373445ff --ringcolor=ffffffff --line-uses-inside \
-	--keyhlcolor=d23c3dff --bshlcolor=d23c3dff --separatorcolor=00000000 \
-	--insidevercolor=fecf4dff --insidewrongcolor=d23c3dff \
-	--ringvercolor=00000035 --ringwrongcolor=ffffffff \
-	--veriftext="" --wrongtext=""
+convert $TMPBG -draw "fill black fill-opacity 0.4 $rectangles" $TMPBG
 
-#i3lock -i /tmp/.i3lock.png --clock --indicator -f --textcolor=ffffff00 --insidecolor=ffffff3e --ringcolor=ffffff3e --linecolor=ffffff00 --keyhlcolor=00000080 --ringvercolor=00000000 --separatorcolor=22222260 --insidevercolor=0000001c --ringwrongcolor=00000055 --insidewrongcolor=0000001c
+i3lock	-i /tmp/.i3lock.png \
+	--timepos="x-90:h-ch+30" \
+	--datepos="tx+24:ty+25" \
+	--clock --datestr "Type password to unlock..." \
+	--insidecolor=$background --ringcolor=$foreground --line-uses-inside \
+	--keyhlcolor=$letterEnteredColor --bshlcolor=$letterRemovedColor --separatorcolor=$background \
+	--insidevercolor=$passwordCorrect --insidewrongcolor=$passwordIncorrect \
+	--ringvercolor=$foreground --ringwrongcolor=$foreground --indpos="x+280:h-70" \
+	--radius=20 --ring-width=4 --veriftext="" --wrongtext="" \
+	--textcolor="$foreground" --timecolor="$foreground" --datecolor="$foreground"
+
 rm /tmp/.i3lock.png
-xbacklight -set 50%
+#xbacklight -set 50%

@@ -63,6 +63,40 @@ modules-center = date cal
 modules-right = volume redshift backlight wlan test battery bar2
 tray-position = 
 
+
+[bar/topHDMI]
+enable-ipc = true
+monitor = HDMI-1
+width = 100%
+height = 23 
+fixed-center = true
+offset-x = 0%
+offset-y = 0%
+background = ${colors.bg}
+foreground = ${colors.fg}
+
+line-size = 3
+border-bottom-size = 0
+
+padding-left = 0
+padding-right = 0
+
+module-margin-left = 0
+module-margin-right = 0
+
+
+font-0 = Futura Bk BT Book:size=10;0
+font-1 = Material Icons:size=10;2
+font-2 = Termsynu:size=8;0
+font-3 = Siji:pixelsize=10;1
+font-4 = FontAwesome:size=10;0
+
+modules-left = i3 xwindow
+modules-center = date cal
+modules-right = volume redshift wlan test battery bar2
+tray-position = 
+
+
 [module/xwindow]
 type = internal/xwindow
 label = " %title% "
@@ -149,12 +183,12 @@ format-padding = 1
 type = internal/network
 interface = wlp1s0
 interval = 3.0
-label-connected = %local_ip%
+label-connected = %downspeed% %upspeed% %local_ip%
 format-connected = <label-connected>
 format-connected-prefix = " "
 format-connected-prefix-foreground = ${colors.color6}
 format-connected-padding = 1
-format-disconnected =" Not Connected"
+format-disconnected ="  Not Connected"
 format-disconnected-foreground = ${colors.color1}
 
 [module/volume]

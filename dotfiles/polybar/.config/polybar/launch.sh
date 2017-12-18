@@ -14,6 +14,7 @@ if  polybar -m | grep HDMI1
 
 then
 
-        polybar -c ~/.config/polybar/colorful topHDMI &
-        polybar -c ~/.config/polybar/colorful bottomHDMI &
+	killall -q polybar
+        polybar -c ~/.config/polybar/usefull topHDMI &
+        polybar -c ~/.config/polybar/custom subtopHDMI &
 fi

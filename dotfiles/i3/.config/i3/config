@@ -150,8 +150,8 @@ exec --no-startup-id mpd &
 exec --no-startup-id xfsettingsd &
 exec --no-startup-id xfce4-volumed &
 exec --no-startup-id dunst -config ~/.config/dunst/dunstrc &
-exec --no-startup-id /bin/bash -c "seq 0 3 | xargs -l1 -I@ compton --config /etc/xdg/compton.conf -b -d :0.@"
-exec --no-startup-id xautolock -detectsleep -time 20 -locker ~/.config/i3/pixerllock.sh &
+exec --no-startup-id compton -b
+exec --no-startup-id xautolock -detectsleep -time 60 -locker ~/.config/i3/pixerllock.sh &
 exec --no-startup-id /usr/bin/caffeine-indicator &
 exec --no-startup-id redshift -l geoclue2 -t 6400:4900 -b 1.0:0.8 &
 exec --no-startup-id nm-applet &
