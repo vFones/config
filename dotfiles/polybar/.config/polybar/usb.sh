@@ -9,7 +9,7 @@ fi
 for f in `ls $dir`; do
   size=`df --output=avail -h $dir/$f | tail -1`
   size="${size}B"
-  res="$res $f ($size)  "
+  res="$res$f ($size  )"
 done
 
 echo -e "${res%*  }"

@@ -58,7 +58,7 @@ font-4 = FontAwesome:size=10;0
 
 modules-left =
 modules-center = mpd
-modules-right = xrp vpncheck usb cpu memory closebar
+modules-right = vpncheck usb cpu memory closebar
 
 tray-position = left
 tray-detached = false
@@ -122,7 +122,7 @@ format-prefix-foreground = ${colors.color2}
 
 [module/xrp]
 type = custom/script
-interval = 3600
+interval = 1800
 format = "<label> "
 format-prefix = "  "
 tail = true
@@ -137,7 +137,7 @@ format-online-foreground = ${colors.fg}
 format-online-underline = ${colors.bg}
 format-offline = <label-offline>
 label-offline = " No music playing "
-port = 6601
+port = 6600
 host= 127.0.0.1
 
 icon-prev = 

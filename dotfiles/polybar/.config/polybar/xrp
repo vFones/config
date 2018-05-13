@@ -1,8 +1,13 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 
-import requests
+from urllib.request import urlopen
+import simplejson
 
-r = requests.get('https://min-api.cryptocompare.com/data/price?fsym=XRP&tsyms=EUR');
-price = r.json()
-
-print(price['EUR'])
+r = urlopen("https://shapeshift.io/marketinfo/xrp_eth")
+datar = simplejson.load(r)
+howmanyxrp = 52.107634
+eth = howmanyxrp * datar["rate"]
+e = urlopen("https://api.coinbase.com/v2/prices/eth-eur/buy")
+datae = simplejson.load(e)
+currentvaluesineur = float(datae["data"]["amount"]) * eth
+print('~','%.2f' % currentvaluesineur)
