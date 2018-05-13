@@ -105,7 +105,7 @@ click-left = polybar-msg -p %pid% cmd quit
 [module/usb]
 type = custom/script
 interval = 300
-exec = ~/.config/polybar/usb
+exec = ~/.config/polybar/usb.sh
 format-prefix= " "
 format-prefix-foreground = ${colors.color4}
 label = "%output:0:80%"

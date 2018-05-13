@@ -18,13 +18,10 @@ call vundle#end()
 filetype plugin indent on
 syntax on
 
-set backspace=indent,eol,start
-set shell=/bin/bash
 
 set t_Co=256
 let base16colorspace=256
-colorscheme base16-seti "base16-gruvbox-dark-pale 
-set termguicolors
+colorscheme base16-gruvbox-dark-pale 
 
 let g:limelight_conceal_ctermfg='grey'
 
@@ -74,4 +71,4 @@ let g:goyo_margin_bottom = 2
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-let g:airline_theme='base16_seti'
+"let g:airline_theme='base16_seti'
