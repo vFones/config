@@ -1,14 +1,15 @@
 set nocompatible
+filetype on
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'mbbill/undotree'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
-"Plugin 'dylanaraps/wal.vim'
-Plugin 'morhetz/gruvbox'
+Plugin 'chriskempson/base16-vim'
 Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/limelight.vim'
 Plugin 'c.vim'
@@ -17,15 +18,17 @@ call vundle#end()
 filetype plugin indent on
 syntax on
 
-let g:gruvbox_italic=1
-let g:gruvbox_termcolors=256
-set background=dark
-let g:gruvbox_contrast_dark='dark'
+set backspace=indent,eol,start
+set shell=/bin/bash
+
 set t_Co=256
-colorscheme gruvbox "wal
+let base16colorspace=256
+colorscheme base16-seti "base16-gruvbox-dark-pale 
+set termguicolors
+
 let g:limelight_conceal_ctermfg='grey'
 
-set tabstop=8 "impostazioni
+set tabstop=2 "impostazioni
 set softtabstop=2 " per
 set noexpandtab " i tab
 
@@ -64,9 +67,11 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
 let g:goyo_width = 80
 let g:goyo_margin_top = 2
 let g:goyo_margin_bottom = 2
+
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-
+let g:airline_theme='base16_seti'
