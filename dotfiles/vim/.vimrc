@@ -9,7 +9,7 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'mbbill/undotree'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
-Plugin 'chriskempson/base16-vim'
+Plugin 'morhetz/gruvbox'
 Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/limelight.vim'
 Plugin 'c.vim'
@@ -19,9 +19,12 @@ filetype plugin indent on
 syntax on
 
 
+let g:gruvbox_italic=1
+let g:gruvbox_termcolors=256
+set background=dark
+let g:gruvbox_contrast_dark='dark'
 set t_Co=256
-let base16colorspace=256
-colorscheme base16-gruvbox-dark-pale 
+colorscheme gruvbox
 
 let g:limelight_conceal_ctermfg='grey'
 
@@ -71,4 +74,3 @@ let g:goyo_margin_bottom = 2
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-"let g:airline_theme='base16_seti'
