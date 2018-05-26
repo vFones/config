@@ -1,4 +1,6 @@
 [submodule "dotfiles/oh-my-zsh/.oh-my-zsh"]
 	url = https://github.com/robbyrussell/oh-my-zsh.git
+[submodule "dotfiles/oh-my-zsh/.oh-my-zsh/themes/powerlevel9k"]
+	url = https://github.com/bhilburn/powerlevel9k
 [submodule "dotfiles/vim/.vim/bundle/Vundle.vim"]
 	url = https://github.com/VundleVim/Vundle.vim.git

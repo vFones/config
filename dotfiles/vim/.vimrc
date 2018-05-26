@@ -1,13 +1,14 @@
 set nocompatible
+filetype on
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'mbbill/undotree'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
-"Plugin 'dylanaraps/wal.vim'
 Plugin 'morhetz/gruvbox'
 Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/limelight.vim'
@@ -17,12 +18,14 @@ call vundle#end()
 filetype plugin indent on
 syntax on
 
+
 let g:gruvbox_italic=1
 let g:gruvbox_termcolors=256
 set background=dark
 let g:gruvbox_contrast_dark='dark'
 set t_Co=256
-colorscheme gruvbox "wal
+colorscheme gruvbox
+
 let g:limelight_conceal_ctermfg='grey'
 
 set tabstop=2 "impostazioni

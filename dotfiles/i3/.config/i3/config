@@ -7,9 +7,8 @@ font pango:Futura Bk BT Book 11
 floating_modifier $mod
 #
 # Start a terminal
-bindsym $mod+Shift+Return exec rxvt-unicode
-bindsym $mod+Return exec xfce4-terminal
-#
+bindsym $mod+Return exec termite
+
 # Kill focused window
 bindsym $mod+Shift+q kill
 #
@@ -26,10 +25,15 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 #
 # Split in horizontal orientation
-bindsym $mod+i split h
+bindsym $mod+h split h
 #
 # Split in vertical orientation
-bindsym $mod+o split v
+bindsym $mod+v split v
+#
+#
+bindsym $mod+Shift+minus move scratchpad
+#
+bindsym $mod+minus scratchpad show
 #
 # Enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -82,11 +86,12 @@ for_window [class="Telegram"] move container to workspace 4
 for_window [class="Nightly"] move container to workspace 2
 for_window [class="(?i)mozilla thunderbird"] move container to workspace 3
 for_window [class="ncmpcpp"] move container to workspace 10
+for_window [class="Xfce4-terminal"] floating enable
+
 smart_borders no_gaps
 smart_gaps on
-gaps inner 5
-gaps outer 5
-
+gaps inner 10
+gaps outer 10
 
 # Window colors
 set_from_resource $fg xrdb.foreground #f0f0f0
@@ -106,10 +111,10 @@ bindsym XF86MonBrightnessDown exec xbacklight -5 && notify-send "Brightness -5"
 
 popup_during_fullscreen smart
 
-bindsym mod+c exec chromium-browser
-bindsym mod+m exec ncmpcpp
+bindsym $mod+c exec --no-startup-id ~/.config/i3/select_t
+bindsym $mod+m exec ncmpcpp
 
-bindsym mod+x exec xkill
+bindsym $mod+x exec xkill
 
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -143,21 +148,21 @@ bindsym $mod+XF86PowerOff mode "$mode_system"
 
 bindsym $mod+l exec ~/.config/i3/pixerllock.sh &
 bindsym $mod+b exec ~/.config/polybar/launch.sh &
-bindsym $mod+v exec pkill polybar &
+bindsym $mod+Shift+v exec pkill polybar &
 
 exec setxkbmap -layout it
 exec --no-startup-id mpd &
 exec --no-startup-id xfsettingsd &
 exec --no-startup-id xfce4-volumed &
+exec --no-startup-id xfce4-power-manager &
 exec --no-startup-id dunst -config ~/.config/dunst/dunstrc &
-exec --no-startup-id compton -b
+exec --no-startup-id compton -b &
 exec --no-startup-id xautolock -detectsleep -time 60 -locker ~/.config/i3/pixerllock.sh &
 exec --no-startup-id /usr/bin/caffeine-indicator &
 exec --no-startup-id redshift -l geoclue2 -t 6400:4900 -b 1.0:0.8 &
 exec --no-startup-id nm-applet &
 exec --no-startup-id telegram
-exec --no-startup-id thunderbird
-
+exec --no-startup-ip nextcloud &
 # Setup wallpaper
 #exec_always wal -t -i ~/Immagini/Wallpaper/light.jpg
 exec_always --no-startup-id ~/.fehbg &
