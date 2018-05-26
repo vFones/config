@@ -25,7 +25,7 @@ set t_Co=256
 colorscheme gruvbox "wal
 let g:limelight_conceal_ctermfg='grey'
 
-set tabstop=8 "impostazioni
+set tabstop=2 "impostazioni
 set softtabstop=2 " per
 set noexpandtab " i tab
 
@@ -44,6 +44,7 @@ set mouse=a " abilita puntatore
 
 
 let mapleader=","
+imap kl <ESC> 
 nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>g :Goyo<CR>
@@ -64,9 +65,10 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
 let g:goyo_width = 80
 let g:goyo_margin_top = 2
 let g:goyo_margin_bottom = 2
+
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-
