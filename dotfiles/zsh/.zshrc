@@ -80,12 +80,16 @@ alias q="exit"
 alias lls="ls -lha"
 alias sl="ls"
 alias shutdown="sudo shutdown now"
+alias aws="ssh -i $HOME/.ssh/.aws.pem ubuntu@34.216.55.115"
+alias raspy="ssh pi@192.168.2.231"
+alias vpn="sudo systemctl restart openvpn@chrome.service"
+alias valgrind="valgrind --tool=memcheck --leak-check=yes --show-reachable=yes --num-callers=20 --track-fds=yes"
 # Powerline theme configuration
 
    #POWERLEVEL9K_MODE=''
 
 #Path to your oh-my-zsh installation.
-export ZSH=$HOME/config/dotfiles/oh-my-zsh/.oh-my-zsh
+export ZSH=$HOME/.src/config/dotfiles/oh-my-zsh/.oh-my-zsh
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -146,3 +150,6 @@ POWERLEVEL9K_TIME_FOREGROUND="black"
 
 #Showing command at first launch   
 #neofetch --bold off --block_range 0 7 --colors 4 6 8 3 5 7 
+fpath=(~/.zsh/completion $fpath)
+autoload -Uz compinit && compinit -i
+

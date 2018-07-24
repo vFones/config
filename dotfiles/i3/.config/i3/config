@@ -88,10 +88,28 @@ for_window [class="(?i)mozilla thunderbird"] move container to workspace 3
 for_window [class="ncmpcpp"] move container to workspace 10
 for_window [class="Xfce4-terminal"] floating enable
 
-smart_borders no_gaps
-smart_gaps on
-gaps inner 10
-gaps outer 10
+
+# DEFAULT BORDER
+# for_window [class="^.*"] border pixel 0
+# for_window [title="^.*"] border pixel 0
+#
+# # APPLICATION BORDERS
+# for_window [class="Emacs"] border normal 24
+# for_window [class="URxvt"] border normal 24
+#
+# # GAP VARIABLES
+ set $inner 32
+ set $outer 16
+#
+# # SET GAPS
+ gaps inner $inner
+ gaps outer $outer
+#
+# # TOGGLE GAPS
+ bindsym $mod+g gaps inner all set $inner; gaps outer all set $outer
+ bindsym $mod+Ctrl+g  gaps inner all set 0; gaps outer all set 0
+#
+#
 
 # Window colors
 set_from_resource $fg xrdb.foreground #f0f0f0
@@ -111,7 +129,6 @@ bindsym XF86MonBrightnessDown exec xbacklight -5 && notify-send "Brightness -5"
 
 popup_during_fullscreen smart
 
-bindsym $mod+c exec --no-startup-id ~/.config/i3/select_t
 bindsym $mod+m exec ncmpcpp
 
 bindsym $mod+x exec xkill
@@ -173,3 +190,4 @@ exec_always --no-startup-id ~/.config/polybar/launch.sh &
 # rofi
 bindsym $mod+Tab exec rofi -show window
 bindsym $mod+BackSpace exec ~/.config/i3/./rofi.sh 
+bindsym $mod+c exec ~/.config/i3/./select_t.sh 
