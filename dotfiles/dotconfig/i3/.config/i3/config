@@ -1,0 +1,193 @@
+set $mod Mod4
+
+# Font
+font pango:Futura Bk BT Book 11
+#
+# Key for drag windows (mouse+$mod)
+floating_modifier $mod
+#
+# Start a terminal
+bindsym $mod+Return exec termite
+
+# Kill focused window
+bindsym $mod+Shift+q kill
+#
+# Change focus
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+#
+# Alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+#
+# Split in horizontal orientation
+bindsym $mod+h split h
+#
+# Split in vertical orientation
+bindsym $mod+v split v
+#
+#
+bindsym $mod+Shift+minus move scratchpad
+#
+bindsym $mod+minus scratchpad show
+#
+# Enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+bindsym XF86ScreenSaver fullscreen toggle
+#
+# Change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+#
+# Toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+#
+# Focus the parent container
+bindsym $mod+a focus parent
+#
+# Switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+#
+# Move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+#
+# Reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace
+bindsym $mod+Shift+r restart
+
+focus_follows_mouse  yes
+
+for_window [class=".*"] border pixel 1
+for_window [class="Telegram"] move container to workspace 4
+for_window [class="Nightly"] move container to workspace 2
+for_window [class="(?i)mozilla thunderbird"] move container to workspace 3
+for_window [class="ncmpcpp"] move container to workspace 10
+for_window [class="Xfce4-terminal"] floating enable
+
+
+# DEFAULT BORDER
+# for_window [class="^.*"] border pixel 0
+# for_window [title="^.*"] border pixel 0
+#
+# # APPLICATION BORDERS
+# for_window [class="Emacs"] border normal 24
+# for_window [class="URxvt"] border normal 24
+#
+# # GAP VARIABLES
+ set $inner 32
+ set $outer 16
+#
+# # SET GAPS
+ gaps inner $inner
+ gaps outer $outer
+#
+# # TOGGLE GAPS
+ bindsym $mod+g gaps inner all set $inner; gaps outer all set $outer
+ bindsym $mod+Ctrl+g  gaps inner all set 0; gaps outer all set 0
+#
+#
+
+# Window colors
+set_from_resource $fg xrdb.foreground #f0f0f0
+set_from_resource $bg xrdb.background #f0f0f0
+
+# class                 border  backgr. text indicator child_border
+client.focused          $bg     $bg     $fg  $bg       $fg
+client.focused_inactive $bg     $bg     $fg  $bg       $bg
+client.unfocused        $bg     $bg     $fg  $bg       $bg
+client.urgent           $bg     $bg     $fg  $bg       $bg
+client.placeholder      $bg     $bg     $fg  $bg       $bg
+client.background       $bg
+
+# fn keys binds
+bindsym XF86MonBrightnessUp exec xbacklight +5 && notify-send "Brightness +5"  
+bindsym XF86MonBrightnessDown exec xbacklight -5 && notify-send "Brightness -5"  
+
+popup_during_fullscreen smart
+
+bindsym $mod+m exec ncmpcpp
+
+bindsym $mod+x exec xkill
+
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Up resize grow height 10 px or 10 ppt
+        bindsym Down resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # arrow keys #
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+
+set $mode_system (L)   , (E)   , (Shift+R)   , (Shift+S)  
+mode "$mode_system" {
+    bindsym l exec --no-startup-id ~/.config/i3/pixerllock.sh , mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym Shift+r exec --no-startup-id reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id poweroff, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+XF86PowerOff mode "$mode_system"
+
+bindsym $mod+l exec ~/.config/i3/pixerllock.sh &
+bindsym $mod+b exec ~/.config/polybar/launch.sh &
+bindsym $mod+Shift+v exec pkill polybar &
+
+exec setxkbmap -layout it
+exec --no-startup-id mpd &
+exec --no-startup-id xfsettingsd &
+exec --no-startup-id xfce4-volumed &
+exec --no-startup-id xfce4-power-manager &
+exec --no-startup-id dunst -config ~/.config/dunst/dunstrc &
+exec --no-startup-id compton -b &
+exec --no-startup-id xautolock -detectsleep -time 60 -locker ~/.config/i3/pixerllock.sh &
+exec --no-startup-id /usr/bin/caffeine-indicator &
+exec --no-startup-id redshift -l geoclue2 -t 6400:4900 -b 1.0:0.8 &
+exec --no-startup-id nm-applet &
+exec --no-startup-id telegram
+exec --no-startup-ip nextcloud &
+# Setup wallpaper
+#exec_always wal -t -i ~/Immagini/Wallpaper/light.jpg
+exec_always --no-startup-id ~/.fehbg &
+
+# Run status bar
+exec_always --no-startup-id ~/.config/polybar/launch.sh &
+
+# rofi
+bindsym $mod+Tab exec rofi -show window
+bindsym $mod+BackSpace exec ~/.config/i3/./rofi.sh 
+bindsym $mod+c exec ~/.config/i3/./select_t.sh 
