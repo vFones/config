@@ -1,7 +1,6 @@
 set $mod Mod4
-
 # Font
-font pango:Futura Bk BT Book 11
+font pango:Hack Nerd Font 10
 #
 # Key for drag windows (mouse+$mod)
 floating_modifier $mod
@@ -30,25 +29,17 @@ bindsym $mod+h split h
 # Split in vertical orientation
 bindsym $mod+v split v
 #
-#
 bindsym $mod+Shift+minus move scratchpad
 #
 bindsym $mod+minus scratchpad show
 #
 # Enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
-bindsym XF86ScreenSaver fullscreen toggle
-#
 # Change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 #
 # Toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
-#
-# Focus the parent container
-bindsym $mod+a focus parent
 #
 # Switch to workspace
 bindsym $mod+1 workspace 1
@@ -82,34 +73,22 @@ bindsym $mod+Shift+r restart
 focus_follows_mouse  yes
 
 for_window [class=".*"] border pixel 1
+for_window [class="Nextcloud"] move container to workspace 9
 for_window [class="Telegram"] move container to workspace 4
-for_window [class="Nightly"] move container to workspace 2
-for_window [class="(?i)mozilla thunderbird"] move container to workspace 3
+for_window [class="Firefox"] move container to workspace 2
 for_window [class="ncmpcpp"] move container to workspace 10
-for_window [class="Xfce4-terminal"] floating enable
 
+# GAP VARIABLES
+set $inner 32
+set $outer 16
 
-# DEFAULT BORDER
-# for_window [class="^.*"] border pixel 0
-# for_window [title="^.*"] border pixel 0
-#
-# # APPLICATION BORDERS
-# for_window [class="Emacs"] border normal 24
-# for_window [class="URxvt"] border normal 24
-#
-# # GAP VARIABLES
- set $inner 32
- set $outer 16
-#
 # # SET GAPS
- gaps inner $inner
- gaps outer $outer
-#
+gaps inner $inner
+gaps outer $outer
+
 # # TOGGLE GAPS
- bindsym $mod+g gaps inner all set $inner; gaps outer all set $outer
- bindsym $mod+Ctrl+g  gaps inner all set 0; gaps outer all set 0
-#
-#
+bindsym $mod+g gaps inner all set $inner; gaps outer all set $outer
+bindsym $mod+Ctrl+g  gaps inner all set 0; gaps outer all set 0
 
 # Window colors
 set_from_resource $fg xrdb.foreground #f0f0f0
@@ -124,8 +103,11 @@ client.placeholder      $bg     $bg     $fg  $bg       $bg
 client.background       $bg
 
 # fn keys binds
-bindsym XF86MonBrightnessUp exec xbacklight +5 && notify-send "Brightness +5"  
-bindsym XF86MonBrightnessDown exec xbacklight -5 && notify-send "Brightness -5"  
+bindsym XF86MonBrightnessUp exec light -A 5 && notify-send "Brightness +5"  
+bindsym XF86MonBrightnessDown exec light -U 5 && notify-send "Brightness -5"
+bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute && notify-send "plus 2dB"
+bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute && notify-send "2dB less"
+bindsym XF86AudioMute exec amixer -q set Master toggle && notify-send "Muted"
 
 popup_during_fullscreen smart
 
@@ -135,14 +117,11 @@ bindsym $mod+x exec xkill
 
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
-
         bindsym Left resize shrink width 10 px or 10 ppt
         bindsym Up resize grow height 10 px or 10 ppt
         bindsym Down resize shrink height 10 px or 10 ppt
         bindsym Right resize grow width 10 px or 10 ppt
-
         # arrow keys #
-
         # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
@@ -152,42 +131,51 @@ bindsym $mod+r mode "resize"
 
 set $mode_system (L)   , (E)   , (Shift+R)   , (Shift+S)  
 mode "$mode_system" {
-    bindsym l exec --no-startup-id ~/.config/i3/pixerllock.sh , mode "default"
+    bindsym l exec --no-startup-id ~/.config/i3/xwobf.py , mode "default"
     bindsym e exec --no-startup-id i3-msg exit, mode "default"
     bindsym Shift+r exec --no-startup-id reboot, mode "default"
     bindsym Shift+s exec --no-startup-id poweroff, mode "default"
-
-    # back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
 bindsym $mod+XF86PowerOff mode "$mode_system"
 
-bindsym $mod+l exec ~/.config/i3/pixerllock.sh &
-bindsym $mod+b exec ~/.config/polybar/launch.sh &
-bindsym $mod+Shift+v exec pkill polybar &
+bindsym $mod+l exec ~/.config/i3/xwobf.py & 
+bindsym $mod+b exec ~/.config/i3/bat.sh &
+#bindsym $mod+b exec ~/.config/polybar/launch.sh &
+#bindsym $mod+Ctrl+b exec pkill polybar &
 
 exec setxkbmap -layout it
 exec --no-startup-id mpd &
 exec --no-startup-id xfsettingsd &
-exec --no-startup-id xfce4-volumed &
 exec --no-startup-id xfce4-power-manager &
 exec --no-startup-id dunst -config ~/.config/dunst/dunstrc &
 exec --no-startup-id compton -b &
 exec --no-startup-id xautolock -detectsleep -time 60 -locker ~/.config/i3/pixerllock.sh &
 exec --no-startup-id /usr/bin/caffeine-indicator &
 exec --no-startup-id redshift -l geoclue2 -t 6400:4900 -b 1.0:0.8 &
+exec --no-startup-id telegram-desktop
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id nm-applet &
-exec --no-startup-id telegram
-exec --no-startup-ip nextcloud &
+exec --no-startup-id nextcloud &
+exec --no-startup-id blockify &
 # Setup wallpaper
-#exec_always wal -t -i ~/Immagini/Wallpaper/light.jpg
 exec_always --no-startup-id ~/.fehbg &
-
 # Run status bar
-exec_always --no-startup-id ~/.config/polybar/launch.sh &
+bar {
+	position top
+	font pango:Droid Sans Mono for Powerline Plus Nerd File Types Mono 10
+	status_command ~/.src/bumblebee-status/bumblebee-status -m layout battery date time pasink  -p root.path=/ time.format="%H:%M" date.format="%a, %b %d %Y" -t gruvbox-powerline
+}
+bar {
+	font pango:Droid Sans Mono for Powerline Plus Nerd File Types Mono 10
+	status_command ~/.src/bumblebee-status/bumblebee-status -m nic cpu memory -t gruvbox-powerline
+  tray_output primary
+}
 
+
+#exec_always --no-startup-id ~/.config/polybar/launch.sh &
 # rofi
-bindsym $mod+Tab exec rofi -show window
+bindsym F1 exec rofi -show window
 bindsym $mod+BackSpace exec ~/.config/i3/./rofi.sh 
-bindsym $mod+c exec ~/.config/i3/./select_t.sh 
+#bindsym $mod+c exec ~/.config/i3/./select_t.sh 

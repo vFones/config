@@ -1,1 +1,3 @@
 backup
+dotfiles/dothome/local/*
+dotfiles/dothome/ncmpcpp/.ncmpcpp/error.log
