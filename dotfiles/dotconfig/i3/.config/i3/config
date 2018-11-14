@@ -52,6 +52,11 @@ bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
+
+bindsym $mod+Ctrl+Left workspace prev
+bindsym $mod+Ctrl+Right workspace next
+
+
 #
 # Move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
@@ -91,8 +96,16 @@ bindsym $mod+g gaps inner all set $inner; gaps outer all set $outer
 bindsym $mod+Ctrl+g  gaps inner all set 0; gaps outer all set 0
 
 # Window colors
-set_from_resource $fg xrdb.foreground #f0f0f0
-set_from_resource $bg xrdb.background #f0f0f0
+set_from_resource $fg xrdb.foreground 
+set_from_resource $bg xrdb.background
+set_from_resource $black xrdb.colo0
+set_from_resource $red xrdb.color1
+set_from_resource $green xrdb.color2
+set_from_resource $yellow xrdb.color3
+set_from_resource $blue xrdb.color4
+set_from_resource $magenta xrdb.color5
+set_from_resource $cyan xrdb.color6
+set_from_resource $white xrdb.color7
 
 # class                 border  backgr. text indicator child_border
 client.focused          $bg     $bg     $fg  $bg       $fg
@@ -105,9 +118,13 @@ client.background       $bg
 # fn keys binds
 bindsym XF86MonBrightnessUp exec light -A 5 && notify-send "Brightness +5"  
 bindsym XF86MonBrightnessDown exec light -U 5 && notify-send "Brightness -5"
-bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute && notify-send "plus 2dB"
-bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute && notify-send "2dB less"
-bindsym XF86AudioMute exec amixer -q set Master toggle && notify-send "Muted"
+bindsym XF86AudioPause exec playerctl play-pause 
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+bindsym XF86AudioMute exec $HOME/.config/i3/volume.sh mute
+bindsym XF86AudioLowerVolume exec $HOME/.config/i3/volume.sh down 
+bindsym XF86AudioRaiseVolume exec $HOME/.config/i3/volume.sh up
 
 popup_during_fullscreen smart
 
@@ -162,14 +179,31 @@ exec --no-startup-id blockify &
 # Setup wallpaper
 exec_always --no-startup-id ~/.fehbg &
 # Run status bar
+
 bar {
-	position top
-	font pango:Droid Sans Mono for Powerline Plus Nerd File Types Mono 10
-	status_command ~/.src/bumblebee-status/bumblebee-status -m layout battery date time pasink  -p root.path=/ time.format="%H:%M" date.format="%a, %b %d %Y" -t gruvbox-powerline
+	output lVDS-1
+  position top
+	font pango: Hack Nerd Font 11 
+  status_command ~/.src/bumblebee-status/bumblebee-status -m title battery brightness date time pasink -p root.path=/ time.format="%H:%M" date.format="%a, %b %d %Y" -t gruvbox-powerline
 }
 bar {
-	font pango:Droid Sans Mono for Powerline Plus Nerd File Types Mono 10
-	status_command ~/.src/bumblebee-status/bumblebee-status -m nic cpu memory -t gruvbox-powerline
+  output LVDS-1
+	font pango: Hack Nerd Font 11
+	status_command ~/.src/bumblebee-status/bumblebee-status -m mpd spotify progress nic  -t gruvbox-powerline
+  tray_output primary
+}
+
+
+bar {
+	output HDMI-1
+  position top
+	font pango: Hack Nerd Font 11 
+  status_command ~/.src/bumblebee-status/bumblebee-status -m title layout battery redshift brightness date time pasink  -p root.path=/ time.format="%H:%M" date.format="%a, %b %d %Y" -t gruvbox-powerline
+}
+bar {
+  output HDMI-1
+	font pango: Hack Nerd Font 11
+	status_command ~/.src/bumblebee-status/bumblebee-status -m mpd spotify memory cpu progress nic  -t gruvbox-powerline
   tray_output primary
 }
 

@@ -1,6 +1,5 @@
 [global]
 font = "Droid Sans Mono for Powerline Plus Nerd File Types Mono, 11"
-allow_markup = yes
 format = "<b>%s</b> %p\n%b"
 sort = yes
 indicate_hidden = yes
@@ -22,10 +21,8 @@ padding = 16
 horizontal_padding = 16
 separator_color = auto
 startup_notification = false
-
-[frame]
-width = 5
-color = "#444444"
+frame_width = 5
+frame_color = "#444444"
 
 [shortcuts]
 close = ctrl+space
@@ -34,7 +31,7 @@ close_all = ctrl+shift+space
 [urgency_low]
 background = "#fba922"
 foreground = "#000000"
-timeout = 1
+timeout = 10
 
 [urgency_normal]
 background = "#262626"
@@ -44,6 +41,6 @@ timeout = 10
 [urgency_critical]
 background = "#e02e3c"
 foreground = "#ffffff"
-timeout = 0
+timeout = 10
 
 # vim:ft=dosini

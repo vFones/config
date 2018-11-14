@@ -23,10 +23,9 @@ fi
 
 #xbacklight -set 0%
 TMPBG=/tmp/.i3lock.png
-
+killall -SIGUSR1 dunst # pause
 convert $TMPBG -fill black -colorize 40% $TMPBG
-
-i3lock	-i /tmp/.i3lock.png -e -k \
+i3lock -n -i /tmp/.i3lock.png -e -k \
     --timecolor=$foreground \
     --timepos=$timepos --indpos=$indpos \
     --noinputtext="" --insidecolor=$background \
@@ -36,6 +35,6 @@ i3lock	-i /tmp/.i3lock.png -e -k \
 		--ringvercolor=$foreground --ringwrongcolor=$foreground \
 		--radius=20 --ring-width=4 --veriftext="" --wrongtext="" \
 		--layoutcolor="$foreground" --datecolor="$foreground" 
-
+killall -SIGUSR2 dunst # resume
 rm /tmp/.i3lock.png
 #xbacklight -set 50
