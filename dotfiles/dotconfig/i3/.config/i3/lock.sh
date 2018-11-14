@@ -8,23 +8,23 @@ background=00000000
 foreground=ffffffff
 
 nresX="1280"
-nresY="720"
+nresY="800"
 resX=$(xdpyinfo | grep dimensions | awk '{print $2}' | sed -r 's/([0-9])x.*$/\1/')
 resY=$(xdpyinfo | grep dimensions | awk '{print $2}' | sed -r 's/^[0-9]*x([0-9]+)/\1/')
 
 if [ "${resX}x${resY}" == "${nresX}x${nresY}" ]; then
-  timepos='x+640:h-360'
-  indpos='x+740:h-360'
+  timepos="x+640:h-360"
+  indpos="x+740:h-360"
 else
-  $resX=`expr $resX - $nresX`
+  resX=`expr $resX - $nresX`
   timepos="x+`expr $resX/2`:h-`expr $resY/2`"
   indpos="x+`expr $resX/2+100`:h-`expr $resY/2`"
 fi
 
 #xbacklight -set 0%
 TMPBG=/tmp/.i3lock.png
-killall -SIGUSR1 dunst # pause
 convert $TMPBG -fill black -colorize 40% $TMPBG
+killall -SIGUSR1 dunst # pause
 i3lock -n -i /tmp/.i3lock.png -e -k \
     --timecolor=$foreground \
     --timepos=$timepos --indpos=$indpos \

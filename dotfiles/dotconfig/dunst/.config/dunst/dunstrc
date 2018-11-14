@@ -27,6 +27,7 @@ frame_color = "#444444"
 [shortcuts]
 close = ctrl+space
 close_all = ctrl+shift+space
+history = ctrl+period
 
 [urgency_low]
 background = "#fba922"

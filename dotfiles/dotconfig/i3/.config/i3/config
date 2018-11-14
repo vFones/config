@@ -98,7 +98,8 @@ bindsym $mod+Ctrl+g  gaps inner all set 0; gaps outer all set 0
 # Window colors
 set_from_resource $fg xrdb.foreground 
 set_from_resource $bg xrdb.background
-set_from_resource $black xrdb.colo0
+set_from_resource $black xrdb.color0
+set_from_resource $grey xrdb.color0
 set_from_resource $red xrdb.color1
 set_from_resource $green xrdb.color2
 set_from_resource $yellow xrdb.color3
@@ -166,7 +167,7 @@ exec setxkbmap -layout it
 exec --no-startup-id mpd &
 exec --no-startup-id xfsettingsd &
 exec --no-startup-id xfce4-power-manager &
-exec --no-startup-id dunst -config ~/.config/dunst/dunstrc &
+exec --no-startup-id dunst -config ~/.config/dunst/dunstrc -history &
 exec --no-startup-id compton -b &
 exec --no-startup-id xautolock -detectsleep -time 60 -locker ~/.config/i3/pixerllock.sh &
 exec --no-startup-id /usr/bin/caffeine-indicator &
@@ -184,13 +185,26 @@ bar {
 	output lVDS-1
   position top
 	font pango: Hack Nerd Font 11 
-  status_command ~/.src/bumblebee-status/bumblebee-status -m title battery brightness date time pasink -p root.path=/ time.format="%H:%M" date.format="%a, %b %d %Y" -t gruvbox-powerline
+  status_command ~/.src/bumblebee-status/bumblebee-status -m title battery brightness pasink date time -p root.path=/ time.format="%H:%M" date.format="%a, %b %d %Y" -t gruvbox-powerline
+  tray_output primary
+  colors{
+      background $black
+      inactive_workspace $black $black $foreground
+      focused_workspace $black $yellow $black
+      urgent_workspace $black $red $foreground
+  }
 }
 bar {
   output LVDS-1
 	font pango: Hack Nerd Font 11
-	status_command ~/.src/bumblebee-status/bumblebee-status -m mpd spotify progress nic  -t gruvbox-powerline
-  tray_output primary
+	status_command ~/.src/bumblebee-status/bumblebee-status -m nic  -t gruvbox-powerline
+  colors{
+      background $black
+      inactive_workspace $black $black $foreground
+      focused_workspace $black $yellow $black
+      urgent_workspace $black $red $foreground
+  }
+  tray_output none
 }
 
 
@@ -198,13 +212,26 @@ bar {
 	output HDMI-1
   position top
 	font pango: Hack Nerd Font 11 
-  status_command ~/.src/bumblebee-status/bumblebee-status -m title layout battery redshift brightness date time pasink  -p root.path=/ time.format="%H:%M" date.format="%a, %b %d %Y" -t gruvbox-powerline
+  status_command ~/.src/bumblebee-status/bumblebee-status -m title layout battery redshift pasink date time -p root.path=/ time.format="%H:%M" date.format="%a, %b %d %Y" -t gruvbox-powerline
+  tray_output none
+  colors{
+      background $black
+      inactive_workspace $black $black $foreground
+      focused_workspace $black $yellow $black
+      urgent_workspace $black $red $foreground
+  }
 }
 bar {
   output HDMI-1
 	font pango: Hack Nerd Font 11
-	status_command ~/.src/bumblebee-status/bumblebee-status -m mpd spotify memory cpu progress nic  -t gruvbox-powerline
-  tray_output primary
+	status_command ~/.src/bumblebee-status/bumblebee-status -m memory cpu progress nic  -t gruvbox-powerline
+  tray_output none
+  colors{
+      background $black
+      inactive_workspace $black $black $foreground
+      focused_workspace $black $yellow $black
+      urgent_workspace $black $red $foreground
+  }
 }
 
 
