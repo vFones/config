@@ -18,21 +18,6 @@ if [[ -n $SSH_CONNECTION ]]; then
 else
 	export EDITOR='vim'
 fi
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliasesalias vi="vim"
-alias vi="vim"
-alias vimconf="vi ~/.vimrc"
-alias zshconf="vi ~/.zshrc"
-alias q="exit"
-alias lls="ls -lha"
-alias sl="ls"
-alias shutdown="sudo shutdown now"
-alias raspy="ssh pi@192.168.2.231"
-alias vpn="sudo systemctl restart openvpn.service"
 
 #Path to your oh-my-zsh installation.
 export ZSH=$HOME/.src/config/dotfiles/dothome/oh-my-zsh/.oh-my-zsh/oh-my-zsh
@@ -43,6 +28,25 @@ export ZSH=$HOME/.src/config/dotfiles/dothome/oh-my-zsh/.oh-my-zsh/oh-my-zsh
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(sudo git)
 source $ZSH/oh-my-zsh.sh
+
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliasesalias vi="vim"
+alias vi="vim"
+alias vimconf="vi ~/.vimrc"
+alias zshconf="vi ~/.zshrc"
+alias q="exit"
+alias sl="ls"
+alias raspy="ssh pi@192.168.2.231"
+alias vpn="sudo systemctl restart openvpn.service"
+alias ll="exa -l --git --time-style=long-iso --group-directories-first"
+alias la="exa -la --git --time-style=long-iso --group-directories-first"
+alias lah="exa -lahg --git --time-style=long-iso --group-directories-first"
+
+
 
 # Powerline theme configuration
 POWERLEVEL9K_MODE='nerdfont-complete'

@@ -79,8 +79,8 @@ for_window [class="Firefox"] move container to workspace 2
 for_window [class="ncmpcpp"] move container to workspace 10
 
 # GAP VARIABLES
-set $inner 32
-set $outer 16
+set $inner 16
+set $outer 2
 
 # # SET GAPS
 gaps inner $inner
