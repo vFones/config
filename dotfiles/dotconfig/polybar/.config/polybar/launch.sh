@@ -3,15 +3,6 @@
 # Wait until the processes have been shut down
 while pgrep -x polybar >/dev/null; do pkill polybar; done
 
-polybar -c ~/.config/polybar/usefull top &
-polybar -c ~/.config/polybar/custom subtop &
+polybar top -r& 2> /dev/null
+polybar bottom -r& 2> /dev/null
 
-
-if  polybar -m | grep HDMI1
-
-then
-
-	killall -q polybar
-        polybar -c ~/.config/polybar/usefull topHDMI &
-        polybar -c ~/.config/polybar/custom subtopHDMI &
-fi

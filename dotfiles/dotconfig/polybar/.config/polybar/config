@@ -1,0 +1,3 @@
+include-file = $HOME/.config/polybar/glob.conf
+include-file = $HOME/.config/polybar/bars/top.conf
+include-file = $HOME/.config/polybar/bars/bottom.conf

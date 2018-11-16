@@ -1,46 +1,47 @@
+#Set modifier to cmd/windows key 
 set $mod Mod4
+
 # Font
 font pango:Hack Nerd Font 10
-#
+
 # Key for drag windows (mouse+$mod)
 floating_modifier $mod
-#
+
 # Start a terminal
 bindsym $mod+Return exec termite
 
 # Kill focused window
 bindsym $mod+Shift+q kill
-#
+
 # Change focus
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
-#
-# Alternatively, you can use the cursor keys:
+
+#Move containers with arrowkeys
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
-#
-# Split in horizontal orientation
+
+# Split in horizontal/vertical orientation
 bindsym $mod+h split h
-#
-# Split in vertical orientation
 bindsym $mod+v split v
-#
+
+# scratchpad
 bindsym $mod+Shift+minus move scratchpad
-#
 bindsym $mod+minus scratchpad show
-#
+
 # Enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
+
 # Change container layout (stacked, tabbed, toggle split)
 bindsym $mod+e layout toggle split
-#
+
 # Toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
-#
+
 # Switch to workspace
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
@@ -56,8 +57,6 @@ bindsym $mod+0 workspace 10
 bindsym $mod+Ctrl+Left workspace prev
 bindsym $mod+Ctrl+Right workspace next
 
-
-#
 # Move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
 bindsym $mod+Shift+2 move container to workspace 2
@@ -117,15 +116,19 @@ client.placeholder      $bg     $bg     $fg  $bg       $bg
 client.background       $bg
 
 # fn keys binds
-bindsym XF86MonBrightnessUp exec light -A 5 && notify-send "Brightness +5"  
-bindsym XF86MonBrightnessDown exec light -U 5 && notify-send "Brightness -5"
+bindsym XF86MonBrightnessUp exec light -A 5  
+bindsym XF86MonBrightnessDown exec light -U 5
+bindsym XF86KbdBrightnessUp exec kbdbacklight up
+bindsym XF86KbdBrightnessDown exec kbdbacklight down
+
 bindsym XF86AudioPause exec playerctl play-pause 
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
-bindsym XF86AudioMute exec $HOME/.config/i3/volume.sh mute
-bindsym XF86AudioLowerVolume exec $HOME/.config/i3/volume.sh down 
-bindsym XF86AudioRaiseVolume exec $HOME/.config/i3/volume.sh up
+bindsym XF86AudioMute exec amixer -q set Master toggle
+bindsym XF86AudioLowerVolume exec amixer -q set Master 5%- unmute
+bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+ unmute
+
 
 popup_during_fullscreen smart
 
@@ -134,22 +137,18 @@ bindsym $mod+m exec ncmpcpp
 bindsym $mod+x exec xkill
 
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
         bindsym Left resize shrink width 10 px or 10 ppt
         bindsym Up resize grow height 10 px or 10 ppt
         bindsym Down resize shrink height 10 px or 10 ppt
         bindsym Right resize grow width 10 px or 10 ppt
-        # arrow keys #
-        # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
 
 
-set $mode_system (L)   , (E)   , (Shift+R)   , (Shift+S)  
+set $mode_system (E)   , (Shift+R)   , (Shift+S)  
 mode "$mode_system" {
-    bindsym l exec --no-startup-id ~/.config/i3/xwobf.py , mode "default"
     bindsym e exec --no-startup-id i3-msg exit, mode "default"
     bindsym Shift+r exec --no-startup-id reboot, mode "default"
     bindsym Shift+s exec --no-startup-id poweroff, mode "default"
@@ -158,29 +157,26 @@ mode "$mode_system" {
 }
 bindsym $mod+XF86PowerOff mode "$mode_system"
 
-bindsym $mod+l exec ~/.config/i3/xwobf.py & 
-bindsym $mod+b exec ~/.config/i3/bat.sh &
-#bindsym $mod+b exec ~/.config/polybar/launch.sh &
-#bindsym $mod+Ctrl+b exec pkill polybar &
+bindsym $mod+l exec $HOME/.config/i3/lock.sh &
+bindsym $mod+b exec $HOME/.config/i3/stats.sh &
 
 exec setxkbmap -layout it
-exec --no-startup-id mpd &
+#exec --no-startup-id mpd &
 exec --no-startup-id xfsettingsd &
 exec --no-startup-id xfce4-power-manager &
 exec --no-startup-id dunst -config ~/.config/dunst/dunstrc -history &
 exec --no-startup-id compton -b &
-exec --no-startup-id xautolock -detectsleep -time 60 -locker ~/.config/i3/pixerllock.sh &
-exec --no-startup-id /usr/bin/caffeine-indicator &
-exec --no-startup-id redshift -l geoclue2 -t 6400:4900 -b 1.0:0.8 &
-exec --no-startup-id telegram-desktop
+exec --no-startup-id xrdb -load .Xresources &
+exec --no-startup-id xidlehook --timer primary 600 '~/.config/i3/lock.sh' '' --timer normal 5 'xset dpms force off' '' & 
+exec --no-startup-id redshift -l 40.517:14.165 -t 6400:4900 -b 1.0:0.8 &
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id nm-applet &
-exec --no-startup-id nextcloud &
-exec --no-startup-id blockify &
-# Setup wallpaper
-exec_always --no-startup-id ~/.fehbg &
-# Run status bar
+#exec --no-startup-id blockify &
 
+# Setup wallpaper
+#exec_always --no-startup-id ~/.fehbg &
+
+# Run status bar
 bar {
 	output lVDS-1
   position top
@@ -234,9 +230,6 @@ bar {
   }
 }
 
-
-#exec_always --no-startup-id ~/.config/polybar/launch.sh &
 # rofi
 bindsym F1 exec rofi -show window
 bindsym $mod+BackSpace exec ~/.config/i3/./rofi.sh 
-#bindsym $mod+c exec ~/.config/i3/./select_t.sh 
