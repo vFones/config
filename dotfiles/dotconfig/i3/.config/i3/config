@@ -159,9 +159,9 @@ bindsym $mod+XF86PowerOff mode "$mode_system"
 
 bindsym $mod+l exec $HOME/.config/i3/lock.sh &
 bindsym $mod+b exec $HOME/.config/i3/stats.sh &
+bindsym $mod+k exec $HOME/.config/polybar/launch.sh &
 
 exec setxkbmap -layout it
-#exec --no-startup-id mpd &
 exec --no-startup-id xfsettingsd &
 exec --no-startup-id xfce4-power-manager &
 exec --no-startup-id dunst -config ~/.config/dunst/dunstrc -history &
@@ -170,66 +170,13 @@ exec --no-startup-id xrdb -load .Xresources &
 exec --no-startup-id xidlehook --timer primary 600 '~/.config/i3/lock.sh' '' --timer normal 5 'xset dpms force off' '' & 
 exec --no-startup-id redshift -l 40.517:14.165 -t 6400:4900 -b 1.0:0.8 &
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id $HOME/.config/polybar/launch.sh &
 exec --no-startup-id nm-applet &
-#exec --no-startup-id blockify &
 
 # Setup wallpaper
-#exec_always --no-startup-id ~/.fehbg &
+exec_always --no-startup-id ~/.fehbg &
 
 # Run status bar
-bar {
-	output lVDS-1
-  position top
-	font pango: Hack Nerd Font 11 
-  status_command ~/.src/bumblebee-status/bumblebee-status -m title battery brightness pasink date time -p root.path=/ time.format="%H:%M" date.format="%a, %b %d %Y" -t gruvbox-powerline
-  tray_output primary
-  colors{
-      background $black
-      inactive_workspace $black $black $foreground
-      focused_workspace $black $yellow $black
-      urgent_workspace $black $red $foreground
-  }
-}
-bar {
-  output LVDS-1
-	font pango: Hack Nerd Font 11
-	status_command ~/.src/bumblebee-status/bumblebee-status -m nic  -t gruvbox-powerline
-  colors{
-      background $black
-      inactive_workspace $black $black $foreground
-      focused_workspace $black $yellow $black
-      urgent_workspace $black $red $foreground
-  }
-  tray_output none
-}
-
-
-bar {
-	output HDMI-1
-  position top
-	font pango: Hack Nerd Font 11 
-  status_command ~/.src/bumblebee-status/bumblebee-status -m title layout battery redshift pasink date time -p root.path=/ time.format="%H:%M" date.format="%a, %b %d %Y" -t gruvbox-powerline
-  tray_output none
-  colors{
-      background $black
-      inactive_workspace $black $black $foreground
-      focused_workspace $black $yellow $black
-      urgent_workspace $black $red $foreground
-  }
-}
-bar {
-  output HDMI-1
-	font pango: Hack Nerd Font 11
-	status_command ~/.src/bumblebee-status/bumblebee-status -m memory cpu progress nic  -t gruvbox-powerline
-  tray_output none
-  colors{
-      background $black
-      inactive_workspace $black $black $foreground
-      focused_workspace $black $yellow $black
-      urgent_workspace $black $red $foreground
-  }
-}
-
 # rofi
 bindsym F1 exec rofi -show window
 bindsym $mod+BackSpace exec ~/.config/i3/./rofi.sh 
