@@ -160,14 +160,17 @@ bindsym $mod+XF86PowerOff mode "$mode_system"
 bindsym $mod+l exec $HOME/.config/i3/lock.sh &
 bindsym $mod+b exec $HOME/.config/i3/stats.sh &
 bindsym $mod+k exec $HOME/.config/polybar/launch.sh &
+bindsym $mod+i exec setxkbmap -layout it
+bindsym $mod+u exec setxkbmap -layout us
 
-exec setxkbmap -layout it
 exec --no-startup-id xfsettingsd &
 exec --no-startup-id xfce4-power-manager &
 exec --no-startup-id dunst -config ~/.config/dunst/dunstrc -history &
 exec --no-startup-id compton -b &
 exec --no-startup-id xrdb -load .Xresources &
-exec --no-startup-id xidlehook --timer primary 600 '~/.config/i3/lock.sh' '' --timer normal 5 'xset dpms force off' '' & 
+exec --no-startup-id xidlehook --not-when-fullscreen \
+       --not-when-audio --timer primary 600 \
+       '~/.config/i3/lock.sh' '' --timer normal 5 'xset dpms force off' '' & 
 exec --no-startup-id redshift -l 40.517:14.165 -t 6400:4900 -b 1.0:0.8 &
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id $HOME/.config/polybar/launch.sh &
