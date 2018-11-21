@@ -27,6 +27,12 @@ export ZSH=$HOME/.src/config/dotfiles/dothome/oh-my-zsh/.oh-my-zsh
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(sudo git)
+
+
+#for root warning
+ZSH_DISABLE_COMPFIX=true
+
+#Oh my zsh source
 source $ZSH/oh-my-zsh.sh
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,

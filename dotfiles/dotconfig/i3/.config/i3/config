@@ -77,10 +77,8 @@ bindsym $mod+Shift+r restart
 
 focus_follows_mouse  yes
 for_window [class=".*"] border pixel 1
-for_window [class="Nextcloud"] move container to workspace 9
 for_window [class="Telegram"] move container to workspace 4
 for_window [class="Firefox"] move container to workspace 2
-for_window [class="ncmpcpp"] move container to workspace 10
 
 # GAP VARIABLES
 set $inner 16
@@ -175,7 +173,9 @@ exec --no-startup-id xidlehook --not-when-fullscreen \
 exec --no-startup-id redshift -l 40.517:14.165 -t 6400:4900 -b 1.0:0.8 &
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id $HOME/.config/polybar/launch.sh &
+exec --no-startup-id udiskie -ANt2 &
 exec --no-startup-id nm-applet &
+exec --no-startup-id blueman-applet &
 
 # Setup wallpaper (if commented probably using nitrogen)
 exec_always --no-startup-id ~/.fehbg &
