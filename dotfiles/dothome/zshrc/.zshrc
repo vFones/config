@@ -20,7 +20,7 @@ else
 fi
 
 #Path to your oh-my-zsh installation.
-export ZSH=$HOME/.src/config/dotfiles/dothome/oh-my-zsh/.oh-my-zsh/oh-my-zsh
+export ZSH=$HOME/.src/config/dotfiles/dothome/oh-my-zsh/.oh-my-zsh
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -45,8 +45,6 @@ alias vpn="sudo systemctl restart openvpn.service"
 alias ll="exa -l --git --time-style=long-iso --group-directories-first"
 alias la="exa -la --git --time-style=long-iso --group-directories-first"
 alias lah="exa -lahg --git --time-style=long-iso --group-directories-first"
-
-
 
 # Powerline theme configuration
 POWERLEVEL9K_MODE='nerdfont-complete'
@@ -77,6 +75,6 @@ POWERLEVEL9K_DIR_WRITABLE_FOREGROUND='black'
 POWERLEVEL9K_TIME_BACKGROUND="magenta"
 POWERLEVEL9K_TIME_FOREGROUND="black"
 
-neofetch --bold off --block_range 0 7 --colors 4 6 8 3 5 7 
+#neofetch --bold off --block_range 0 7 --colors 4 6 8 3 5 7 
 fpath=(~/.zsh/completion $fpath)
 autoload -Uz compinit && compinit -i
