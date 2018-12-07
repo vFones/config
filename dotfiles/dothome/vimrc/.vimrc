@@ -1,36 +1,48 @@
 set nocompatible
 filetype on
 filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'mbbill/undotree'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'
-Plugin 'morhetz/gruvbox'
-Plugin 'junegunn/goyo.vim'
-Plugin 'junegunn/limelight.vim'
-Plugin 'c.vim'
+call plug#begin('~/.vim/plugged')
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
-call vundle#end()
+"Tree plugins
+Plug 'mbbill/undotree'
+Plug 'scrooloose/nerdtree'
+
+"Syntax
+Plug 'vim-syntastic/syntastic'
+
+"Colorschemes
+Plug 'dracula/vim'
+Plug 'morhetz/gruvbox'
+
+"Visual
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
+
+"autocomplete plugin"
+Plug 'davidhalter/jedi-vim'
+call plug#end()
+
 filetype plugin indent on
 syntax on
 
-
-let g:gruvbox_italic=1
-let g:gruvbox_termcolors=256
-set background=dark
-let g:gruvbox_contrast_dark='dark'
-set t_Co=256
-colorscheme gruvbox
+"Set gruvbox or dracula colorscheme
+"let g:gruvbox_italic=1
+"let g:gruvbox_termcolors=256
+"let g:gruvbox_contrast_dark='dark'
+"set background=dark
+"set t_Co=256
+let g:dracula_italic = 0
+colorscheme dracula 
+highlight Normal ctermbg=None
 
 let g:limelight_conceal_ctermfg='grey'
 
-set tabstop=2 "impostazioni
-set softtabstop=2 " per
-set noexpandtab " i tab
+"set tabstop=2 "impostazioni
+"set softtabstop=2 " per
+"set noexpandtab " i tab
+set tabstop=8 softtabstop=0 expandtab shiftwidth=2 smarttab
 
 set number " visualizza i numeri ai lati
 set showcmd " visualizza il comando in basso a destra
@@ -45,20 +57,16 @@ set incsearch " migliora ricerca
 set hlsearch " evidenzia ricerca
 set mouse=a " abilita puntatore
 
-
 let mapleader=","
-imap kl <ESC>
+imap CapsLock <ESC>
 nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <leader>n :NERDTreeToggle<CR>
-nnoremap <leader>g :Goyo<CR>
+nnoremap <leader>l :Limelight<CR>
+nnoremap <leader>k :Limelight!<CR>
 nmap <silent> <C-Up> :wincmd k<CR>
 nmap <silent> <C-Down> :wincmd j<CR>
 nmap <silent> <C-Left> :wincmd h<CR>
 nmap <silent> <C-Right> :wincmd l<CR>
-
-                       
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -75,4 +83,3 @@ let g:goyo_margin_bottom = 2
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-
