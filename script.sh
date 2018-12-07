@@ -1,6 +1,5 @@
 #!/bin/sh
 
-VUNDLEGIT="https://github.com/VundleVim/Vundle.vim.git"
 OHMYZSHGIT="https://github.com/robbyrussell/oh-my-zsh"
 POWERLEVEL="https://github.com/bhilburn/powerlevel9k"
 
@@ -42,6 +41,4 @@ do
    stow -v -t $HOME -R $dotfile
 done
 
-git clone $VUNDLEGIT $HOME/.vim/bundle/Vundle.vim
-
-vim +PluginInstall +qall
+vim +PlugInstall +qall
