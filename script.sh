@@ -1,16 +1,10 @@
 #!/bin/sh
 
-VUNDLEGIT="https://github.com/VundleVim/Vundle.vim.git"
-OHMYZSHGIT="https://github.com/robbyrussell/oh-my-zsh"
-POWERLEVEL="https://github.com/bhilburn/powerlevel9k"
-
 BACKUPFOLDER=$PWD/backup
 DOTCONFIG=$PWD/dotfiles/dotconfig
 DOTHOME=$PWD/dotfiles/dothome
 
 mkdir $BACKUPFOLDER
-git clone $OHMYZSHGIT $DOTHOME/oh-my-zsh/.oh-my-zsh/
-git clone $POWERLEVEL $DOTHOME/oh-my-zsh/.oh-my-zsh/custom/themes/powerlevel9k
 
 #Backing up file in .config folder
 cd $DOTCONFIG
@@ -42,6 +36,4 @@ do
    stow -v -t $HOME -R $dotfile
 done
 
-git clone $VUNDLEGIT $HOME/.vim/bundle/Vundle.vim
-
-vim +PluginInstall +qall
+vim +PlugInstall +qall

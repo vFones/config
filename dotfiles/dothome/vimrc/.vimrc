@@ -4,26 +4,14 @@ filetype off
 call plug#begin('~/.vim/plugged')
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-
-"Tree plugins
 Plug 'mbbill/undotree'
 Plug 'scrooloose/nerdtree'
-
-"Syntax
 Plug 'vim-syntastic/syntastic'
-
-"Colorschemes
 Plug 'dracula/vim'
 Plug 'morhetz/gruvbox'
-
-"Visual
-Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
-
-"autocomplete plugin"
 Plug 'davidhalter/jedi-vim'
 call plug#end()
-
 filetype plugin indent on
 syntax on
 
@@ -39,9 +27,6 @@ highlight Normal ctermbg=None
 
 let g:limelight_conceal_ctermfg='grey'
 
-"set tabstop=2 "impostazioni
-"set softtabstop=2 " per
-"set noexpandtab " i tab
 set tabstop=8 softtabstop=0 expandtab shiftwidth=2 smarttab
 
 set number " visualizza i numeri ai lati
@@ -76,10 +61,6 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-
-let g:goyo_width = 80
-let g:goyo_margin_top = 2
-let g:goyo_margin_bottom = 2
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
