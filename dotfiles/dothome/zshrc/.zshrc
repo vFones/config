@@ -190,5 +190,5 @@ fi
 
 zplug load
 
-echo " "
-neofetch --bold off --block_range 0 7 --colors 4 6 8 3 5 7 
+#echo " "
+#neofetch --bold off --block_range 0 7 --colors 4 6 8 3 5 7 

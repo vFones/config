@@ -1,5 +1,8 @@
 #!/bin/sh
 
+#install zsh, gawk, vim AT LEAST
+
+
 BACKUPFOLDER=$PWD/backup
 DOTCONFIG=$PWD/dotfiles/dotconfig
 DOTHOME=$PWD/dotfiles/dothome
