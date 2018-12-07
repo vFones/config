@@ -71,7 +71,7 @@ fi
 
 if zplug check "b4b4r07/enhancd"; then
   ENHANCD_FILTER="fzy"
-  ENHANCD_COMMAND="c"
+  ENHANCD_COMMAND="cd"
 fi
 
 if zplug check "zsh-users/zsh-history-substring-search"; then
