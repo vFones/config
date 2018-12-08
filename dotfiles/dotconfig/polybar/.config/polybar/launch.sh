@@ -1,14 +1,24 @@
 #!/usr/bin/env sh
 
+poly(){
+  polybar $1 -r &2> /dev/null
+}
+
 # Wait until the processes have been shut down
 while pgrep -x polybar &>/dev/null; do pkill polybar; done
 
+bars="top
+bottom
+tophdmi
+bothdmi"
+
 if [ `polybar -m | wc -l` -gt 1 ]; then
-  top="tophdmi"
-  bottom="bothdmi"
+  for bar in $bars
+  do
+    poly "$bar"
+  done
 else
-  top="top"
-  bottom="bottom"
+  poly "top"
+  poly "bottom"
 fi
-polybar $top -r &2> /dev/null
-polybar $bottom -r &2> /dev/null
+
