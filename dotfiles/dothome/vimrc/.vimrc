@@ -11,18 +11,19 @@ Plug 'dracula/vim'
 Plug 'morhetz/gruvbox'
 Plug 'junegunn/limelight.vim'
 Plug 'davidhalter/jedi-vim'
+Plug 'kovetskiy/sxhkd-vim'
 call plug#end()
 filetype plugin indent on
 syntax on
 
-"Set gruvbox or dracula colorscheme
-"let g:gruvbox_italic=1
-"let g:gruvbox_termcolors=256
-"let g:gruvbox_contrast_dark='dark'
-"set background=dark
-"set t_Co=256
-let g:dracula_italic = 0
-colorscheme dracula 
+"let gruvbox or dracula colorscheme
+let g:gruvbox_italic=1
+let g:gruvbox_termcolors=256
+let g:gruvbox_contrast_dark='dark'
+set background=dark
+set t_Co=256
+"let g:dracula_italic = 0
+colorscheme gruvbox
 highlight Normal ctermbg=None
 
 let g:limelight_conceal_ctermfg='grey'

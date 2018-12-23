@@ -2,6 +2,7 @@
 export TERM="xterm-256color"
 export SHELL="/bin/zsh"
 export EDITOR="vim"
+bindkey "^?" backward-delete-char
 
 # history vars
 export HISTFILE="$HOME/.zsh_history"
@@ -39,7 +40,6 @@ alias ls="ls --color=auto"
 alias sl="ls"
 alias ll="k -h"
 alias la="k -ha"
-
 alias raspy="ssh 192.168.2.231"
 
 ######################################
@@ -112,7 +112,7 @@ if zplug check "bhilburn/powerlevel9k"; then
   P9K_MULTILINE_FIRST_PROMPT_PREFIX_ICON="%F{$PROMPT_COLOR}%f"
   P9K_MULTILINE_LAST_PROMPT_PREFIX_ICON="%F{$PROMPT_COLOR}➜ %f"
   P9K_LEFT_PROMPT_ELEMENTS=(os_icon root_indicator context dir dir_writable vcs)
-  P9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs command_execution_time time)
+  P9K_RIGHT_PROMPT_ELEMENTS=(status vi_mode background_jobs command_execution_time time)
   
   P9K_VCS_GIT_GITHUB_ICON=""
   P9K_VCS_GIT_BITBUCKET_ICON=""
