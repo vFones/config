@@ -5,7 +5,7 @@ Using scripts written in bash to keep things automated.
 Highly inspired by /r/unixporn for theme, walls and stuff.
 
 <p align="center">
-  <img src="https://i.imgur.com/vuL10sq.png">
+  <img src="https://i.imgur.com/gjNNJV1.png">
   <img src="https://i.imgur.com/0nvaixC.png">
 </p>
 
