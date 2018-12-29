@@ -1,0 +1,53 @@
+[bar/top]
+monitor=LVDS-1
+enable-ipc = true
+width = 100%
+height = 24
+background = ${colors.Transparent}
+foreground = ${colors.fg}
+offset-x = 0%
+offset-y = 0%
+fixed-center = true
+padding-left = 2
+padding-right = 2
+module-margin = 1.5
+border-top-size = 10
+border-bottom-size = 0
+border-right-size = 10
+border-left-size = 10
+module-margin-left = 0
+module-margin-right = 0
+font-0 = Hack Nerd Font:size=11;3
+modules-left = i3 title
+modules-center =
+modules-right = system-cpu-temppercore ethernet wlan volume backlight battery time date
+tray-position =
+tray-detached = true
+override-redirect = false
+
+[bar/tophdmi]
+monitor=HDMI-1
+enable-ipc = true
+width = 100%
+height = 24
+background = ${colors.Transparent}
+foreground = ${colors.fg}
+offset-x = 0%
+offset-y = 0%
+fixed-center = true
+padding-left = 2
+padding-right = 2
+module-margin = 1.5
+border-top-size = 10
+border-bottom-size = 0
+border-right-size = 10
+border-left-size = 10
+module-margin-left = 0
+module-margin-right = 0
+font-0 = Hack Nerd Font:size=11;3
+modules-left = updates-arch i3 title
+modules-center =
+modules-right = cpu system-cpu-temppercore memory ethernet wlan volume backlight battery time date
+tray-position =
+tray-detached = true
+override-redirect = false

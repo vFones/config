@@ -1,0 +1,16 @@
+[module/updates-arch]
+type = custom/script
+exec = $HOME/.config/polybar/scripts/updates-arch.sh
+interval = 300
+
+[module/system-cpu-temppercore]
+type = custom/script
+exec = $HOME/.config/polybar/scripts/system-cpu-temppercore.sh
+interval = 30
+
+[module/redshift]
+type = custom/script
+interval = 300
+format = "<label> "
+tail = true
+exec = $HOME/.config/polybar/scripts/redshift.sh

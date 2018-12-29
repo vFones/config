@@ -1,0 +1,57 @@
+[module/wlan]
+type = internal/network
+interface = wlp2s0
+interval = 5
+label-connected = "直 %essid% "
+
+[module/ethernet]
+type = internal/network
+interface = enp1s0f0
+label-connected = "  "
+[module/volume]
+type = internal/alsa
+format-volume = "<ramp-volume> <label-volume> "
+format-muted = " off "
+ramp-volume-0 = ""
+ramp-volume-1 = ""
+ramp-volume-2 = ""
+
+[module/backlight]
+type = internal/backlight
+; Use the following command to list available cards:
+; $ ls -1 /sys/class/backlight/
+card = intel_backlight
+format = "<ramp> <label> "
+label = %percentage%%
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+poll-interval = 1
+full-at = 98
+label-discharging = %percentage%%
+label-charging = %percentage%%
+label-full = %percentage%%
+format-discharging = <ramp-capacity> <label-discharging>
+format-full = " <ramp-capacity> <label-full>"
+format-charging =  <label-charging>
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+label = " %percentage%% "
+format-prefix = " "
+
+[module/memory]
+type = internal/memory
+interval = 2
+label = "%percentage_used%% "
+format-prefix = "  "

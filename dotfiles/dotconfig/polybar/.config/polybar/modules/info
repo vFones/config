@@ -1,0 +1,44 @@
+[module/i3]
+type = internal/i3
+pin-workspaces = true
+enable-scroll = false
+label-unfocused-foreground = ${colors.color5}
+
+[module/title]
+type = internal/xwindow
+label  = " %title%"
+label-maxlen = 25
+
+[module/time]
+type = internal/date
+interval = 1.0
+date = "  %H:%M"
+
+[module/date]
+type = internal/date
+date = "  %a %e %b"
+label = %date%
+
+[module/mpd]
+type = internal/mpd
+format-online = " <icon-prev> <toggle> <icon-next> <label-song>"
+format-online-overline = ${colors.bg}
+format-online-foreground = ${colors.fg}
+format-online-underline = ${colors.bg}
+format-offline = <label-offline>
+label-offline = " No music playing "
+port = 6600
+host= 127.0.0.1
+icon-prev = 
+icon-stop = 
+icon-play = 
+icon-pause = 
+icon-next = 
+label-song-maxlen = 25
+label-song-ellipsis = true
+bar-progress-width = 10
+bar-progress-indicator = |
+bar-progress-fill = ─
+bar-progress-empty = ─
+toggle-on-foreground = ${colors.fg}
+toggle-off-foreground = ${colors.color8}

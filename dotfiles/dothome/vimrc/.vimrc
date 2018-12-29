@@ -15,12 +15,11 @@ filetype plugin indent on
 syntax on
 
 let g:gruvbox_italic=1
-let g:gruvbox_termcolors=16
+let g:gruvbox_termcolors=256
 set termguicolors
 set bg=dark
 colorscheme gruvbox
 
-highlight Normal ctermbg=None
 filetype indent on 
 
 set tabstop=8 softtabstop=0 expandtab shiftwidth=2 smarttab

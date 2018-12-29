@@ -1,4 +1,5 @@
 [colors]
+;taken from .Xresources
 
 Transparent = #00ffffff
 bg = ${xrdb:foreground}

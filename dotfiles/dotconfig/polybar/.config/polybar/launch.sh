@@ -8,9 +8,7 @@ poly(){
 while pgrep -x polybar &>/dev/null; do pkill polybar; done
 
 bars="top
-bottom
-tophdmi
-bothdmi"
+tophdmi"
 
 if [ `polybar -m | wc -l` -gt 1 ]; then
   for bar in $bars
@@ -19,6 +17,4 @@ if [ `polybar -m | wc -l` -gt 1 ]; then
   done
 else
   poly "top"
-  poly "bottom"
 fi
-

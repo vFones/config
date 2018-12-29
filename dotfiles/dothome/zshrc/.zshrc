@@ -9,16 +9,6 @@ export HISTFILE="$HOME/.zsh_history"
 export HISTSIZE=9999
 export SAVEHIST=$HISTSIZE
 
-# color formatting for man pages
-export LESS_TERMCAP_mb=$'\e[1;31m'     # begin bold
-export LESS_TERMCAP_md=$'\e[1;36m'     # begin blink
-export LESS_TERMCAP_so=$'\e[1;33;44m'  # begin reverse video
-export LESS_TERMCAP_us=$'\e[1;37m'     # begin underline
-export LESS_TERMCAP_me=$'\e[0m'        # reset bold/blink
-export LESS_TERMCAP_se=$'\e[0m'        # reset reverse video
-export LESS_TERMCAP_ue=$'\e[0m'        # reset underline
-export MANPAGER='less -s -M -R +Gg'
-
 # language environment
 #export LANG=it_IT.UTF-8
 
@@ -40,6 +30,8 @@ alias ls="ls --color=auto"
 alias sl="ls"
 alias ll="k -h"
 alias la="k -ha"
+alias ..="cd .."
+alias ...="cd ../.."
 alias nf="neofetch --bold off --block_range 0 7 --colors 4 6 8 3 5 7" 
 alias raspy="ssh 192.168.2.231"
 
@@ -52,18 +44,17 @@ source ~/.zplug/init.zsh
 zplug "bhilburn/powerlevel9k", use:powerlevel9k.zsh-theme, from:github, at:next, as:theme
 zplug "b4b4r07/enhancd", use:init.sh
 zplug "supercrabtree/k"
+zplug "tarruda/zsh-autosuggestions"
+zplug "zsh-users/zsh-history-substring-search"
 
-# suggestions
-zplug "hlissner/zsh-autopair", defer:2
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-history-substring-search", defer:3
-
-zplug "plugins/sudo", from:oh-my-zsh
-zplug "plugins/docker", from:oh-my-zsh
+zplug "lib/completion",            from:oh-my-zsh
+zplug "lib/key-bindings",          from:oh-my-zsh
+zplug "plugins/sudo",              from:oh-my-zsh
+zplug "plugins/docker",            from:oh-my-zsh
+zplug "plugins/colored-man-pages", from:oh-my-zsh
 
 # check if there are plugins to install
 if ! zplug check; then
-  B
   printf "Install plugins? [y/N]: "
   if read -q; then
     echo; zplug install
@@ -74,12 +65,6 @@ if zplug check "b4b4r07/enhancd"; then
   ENHANCD_FILTER="fzy"
   ENHANCD_COMMAND="cd"
 fi
-
-if zplug check "zsh-users/zsh-history-substring-search"; then
-  bindkey '^[[A' history-substring-search-up
-  bindkey '^[[B' history-substring-search-down
-fi
-
 
 if zplug check "bhilburn/powerlevel9k"; then
   DEFAULT_FOREGROUND=109 DEFAULT_BACKGROUND=235 PROMPT_COLOR=173
@@ -108,7 +93,7 @@ if zplug check "bhilburn/powerlevel9k"; then
   P9K_MULTILINE_FIRST_PROMPT_PREFIX_ICON="%F{$PROMPT_COLOR}%f"
   P9K_MULTILINE_LAST_PROMPT_PREFIX_ICON="%F{$PROMPT_COLOR} ➜ %f"
   P9K_LEFT_PROMPT_ELEMENTS=(os_icon root_indicator context dir dir_writable vcs)
-  P9K_RIGHT_PROMPT_ELEMENTS=(status vi_mode background_jobs command_execution_time time)
+  P9K_RIGHT_PROMPT_ELEMENTS=(status background_jobs command_execution_time time)
   
   P9K_VCS_GIT_GITHUB_ICON=""
   P9K_VCS_GIT_BITBUCKET_ICON=""
@@ -189,3 +174,13 @@ if zplug check "bhilburn/powerlevel9k"; then
 fi
 
 zplug load
+
+if zplug check zsh-users/zsh-autosuggestions; then
+    ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(history-substring-search-up history-substring-search-down)
+    ZSH_AUTOSUGGEST_CLEAR_WIDGETS=("${(@)ZSH_AUTOSUGGEST_CLEAR_WIDGETS:#(up|down)-line-or-history}")
+fi
+
+if zplug check zsh-users/zsh-history-substring-search; then
+    bindkey '^[[A' history-substring-search-up
+    bindkey '^[[B' history-substring-search-down
+fi
