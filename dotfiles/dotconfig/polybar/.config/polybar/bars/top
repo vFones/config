@@ -48,6 +48,6 @@ font-0 = Hack Nerd Font:size=11;3
 modules-left = updates-arch i3 title
 modules-center =
 modules-right = cpu system-cpu-temppercore memory ethernet wlan volume backlight battery time date
-tray-position =
-tray-detached = true
+tray-position = left
+tray-detached = false
 override-redirect = false

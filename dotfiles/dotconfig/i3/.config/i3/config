@@ -132,7 +132,7 @@ bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+ unmute
 
 popup_during_fullscreen smart
 
-bindsym $mod+Shift+x exec xkill > /dev/null 
+bindsym $mod+Shift+x exec xkill 
 bindsym $mod+c exec chromium
 
 mode "resize" {
@@ -158,8 +158,8 @@ bindsym $mod+XF86PowerOff mode "$mode_system"
 #Scripting
 bindsym $mod+l exec $HOME/.config/i3/lock.sh &
 bindsym $mod+b exec $HOME/.config/i3/stats.sh &
-bindsym $mod+p exec $HOME/.config/i3/xrandr.sh &
-bindsym $mod+k exec $HOME/.config/polybar/launch.sh &
+bindsym $mod+p exec $HOME/.config/i3/xrandr.sh 2>&1 > /dev/null &
+bindsym $mod+k exec $HOME/.config/polybar/launch.sh 2>&1 > /dev/null &
 bindsym $mod+BackSpace exec ~/.config/i3/rofi.sh 
 bindsym F1 exec rofi -show window
 
@@ -167,16 +167,17 @@ bindsym $mod+i exec setxkbmap -layout it
 bindsym $mod+u exec setxkbmap -layout us
 
 #Bars and applets
-#exec --no-startup-id $HOME/.config/i3/xrandr.sh & && $HOME/.fehbg &
+exec --no-startup-id $HOME/.config/i3/xrandr.sh & 
 exec --no-startup-id $HOME/.config/polybar/launch.sh &
-#exec --no-startup-id udiskie -ANt2 &
-#exec --no-startup-id nm-applet &
+exec --no-startup-id blueman-applet 2>&1 > /dev/null &
+exec --no-startup-id udiskie -ANt2 2>&1 > /dev/null &
+exec --no-startup-id nm-applet 2>&1 > /dev/null &
 
 #Backend stuff
 exec --no-startup-id dunst -config ~/.config/dunst/dunstrc -history &
-exec --no-startup-id compton -b &
-exec --no-startup-id xrdb -load .Xresources &
-exec --no-startup-id redshift -l 40.517:14.165 -t 6400:4500 &
+exec --no-startup-id compton -b 2>&1 > /dev/null &
+exec --no-startup-id xrdb -load .Xresources 2>&1 > /dev/null &
+exec --no-startup-id redshift -l 40.517:14.165 -t 6400:4500 2>&1 > /dev/null &
 
 #Lockscreen timeout
 exec --no-startup-id xidlehook --not-when-fullscreen \
@@ -205,8 +206,7 @@ exec --no-startup-id xidlehook --not-when-fullscreen \
 #exec_always --no-startup-id gnome-power-manager
 
 #Xfce4 integration
-exec --no-startup-id xfce4-power-manager &
-exec --no-startup-id blueman-applet &
+#exec --no-startup-id xfce4-power-manager &
 
 # Setup wallpaper (if commented probably using nitrogen)
 exec_always --no-startup-id exec hsetroot -add "#c79081" -add "#dfa579" -gradient 0
