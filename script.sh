@@ -63,6 +63,9 @@ dependencies_installer(){
   fi
 }
 install_all_the_scripts(){
+  set -e
+  cd "$(dirname "$0")"/..
+
   git ls-tree --name-only -r osx | grep install.sh | while read -r installer; do
 	  echo "${installer}..."
 	  sh -c "$installer"
@@ -71,3 +74,6 @@ install_all_the_scripts(){
 backuper $DOTS
 #dependencies_installer
 install_all_the_scripts
+
+vim +'PlugInstall --sync' +qa
+vim +'PlugUpdate' +qa
