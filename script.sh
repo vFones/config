@@ -46,9 +46,8 @@ lnstuff
 backuper $DOTHOME
 lnstuff
 
-brew install coreutil zplug
+brew install coreutil zplug fzy getantibody/tap/antibody
 pip install powerline-shell
 
 vim +'PlugInstall --sync' +qa
 vim +'PlugUpdate' +qa
-
