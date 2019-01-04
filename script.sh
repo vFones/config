@@ -69,8 +69,8 @@ install_all_the_scripts(){
   done
 }
 backuper $DOTS
-#dependencies_installer
+dependencies_installer
 install_all_the_scripts
 
-#vim +'PlugInstall --sync' +qa
-#vim +'PlugUpdate' +qa
+vim +'PlugInstall --sync' +qa
+vim +'PlugUpdate' +qa
