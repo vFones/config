@@ -58,6 +58,9 @@ dependencies_installer(){
       fi
     else
       echo "Good luck in esports w Debian based distro"
+      sudo apt update && sudo apt install -y vim zsh i3 dunst
+      echo " "
+      echo "those are not enough, install antibody at least for zsh"
     fi
   fi
 }

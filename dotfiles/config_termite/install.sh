@@ -6,8 +6,8 @@ if ! test "$(uname)" = "Darwin"; then
       ln -s -f $1/config_termite/ $HOME/.config/termite
       exit 1
     fi
-    ln -s $1/config_termite/config $HOME/.config/termite/config
+    ln -s -f $1/config_termite/config $HOME/.config/termite/config
   else
-    ln -s $1/config_termite $HOME/.config/termite
+    ln -s -f $1/config_termite $HOME/.config/termite
   fi
 fi

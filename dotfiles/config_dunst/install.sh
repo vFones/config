@@ -4,7 +4,7 @@ if ! test "$(uname)" = "Darwin"; then
     echo "Linking dunstrc to .config/dunst/dunstrc"
     ln -s -f $1/config_dunst/dunstrc $HOME/.config/dunst/dunstrc
   else
-    ln -s $1/config_dunst $HOME/.config/dunst
+    ln -s -f $1/config_dunst $HOME/.config/dunst
     echo "Linking dunst folder to .config/dunst"
   fi
 fi
