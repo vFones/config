@@ -9,6 +9,8 @@ Highly inspired by /r/unixporn for theme, walls and stuff.
   <img src="https://i.imgur.com/0nvaixC.png">
 </p>
 
-## Dependencies
-i3, polybar, stow, dunst, termite, compton, oh-my-zsh ...
-(check files to grep more)
+Installing dependencies on osx, arch (not tested).
+making backup before replacing with symbolic link || replace symlink if relaunch script.
+thanks to the author of antibody for script managing.
+
+work in progress...
