@@ -58,7 +58,6 @@ dependencies_installer(){
       fi
     else
       echo "Good luck in esports w Debian based distro"
-      exit 1
     fi
   fi
 }
