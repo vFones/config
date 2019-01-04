@@ -65,7 +65,7 @@ dependencies_installer(){
 install_all_the_scripts(){
   git ls-tree --name-only -r osx | grep install.sh | while read -r installer; do
 	  echo "${installer}..."
-	  sh -c "$installer"
+	  sh -c "$installer $(pwd)"
   done
 }
 backuper $DOTS
