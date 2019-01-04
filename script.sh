@@ -63,9 +63,6 @@ dependencies_installer(){
   fi
 }
 install_all_the_scripts(){
-  set -e
-  cd "$(dirname "$0")"/..
-
   git ls-tree --name-only -r osx | grep install.sh | while read -r installer; do
 	  echo "${installer}..."
 	  sh -c "$installer"
