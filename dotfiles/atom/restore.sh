@@ -1,6 +1,5 @@
 #!/bin/sh
 
-
 if [ -f packages-list.bk ]; then
   apm clean
   apm install --packages-file packages-list.bk
