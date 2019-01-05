@@ -1,16 +1,24 @@
-# Archbook
-
-Using this configuration on my macbook pro mid 2012 running Arch.
-Using scripts written in bash to keep things automated.
-Highly inspired by /r/unixporn for theme, walls and stuff.
-
 <p align="center">
-  <img src="https://i.imgur.com/gjNNJV1.png">
-  <img src="https://i.imgur.com/0nvaixC.png">
+  <img src="https://i.imgur.com/kBR2hGj.png">
 </p>
 
-Installing dependencies on osx, arch (not tested).
-making backup before replacing with symbolic link || replace symlink if relaunch script.
-thanks to the author of antibody for script managing.
+# Atom's rice
 
-work in progress...
+Using this configuration on my MacBook Pro mid 2012 running Arch/MacOS, Acer Chromebook with GalliumOS, Raspberry Pi 3B with DietPi.
+Using scripts written in bash to keep things automated.
+Making backup before replacing with symbolic link or replace symlink if relaunching script.
+
+
+### Compatibility
+script.sh works on:
+* MacOS High Sierra (tested script.sh)
+* [Arch](https://i.imgur.com/gjNNJV1.png) (Not tested script.sh) 
+* Debian Based - only if you got all dependencies built and installed (Not tested)
+
+### TODO
+* More automation
+* Bug fixes
+
+### Inspirations
+* [/r/unixporn](https://reddit.com/r/unixporn) for theme, walls and stuff.
+* [caarlos0 dotfiles](https://github.com/caarlos0/dotfiles) for script.sh.
