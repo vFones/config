@@ -1,12 +1,10 @@
-#!bin/sh
+#!/bin/sh
 
-#Full atom clean
-apm clean
 
-if [-f package-list.bcp]; then
-    #Now you can install a new plugin configuration:
-    apm install --packages-file package-list.bcp
+if [ -f packages-list.bk ]; then
+  apm clean
+  apm install --packages-file packages-list.bk
 else
-    echo "Error: No such file package-list.bcp"
+  echo "Error: No such file package-list.bk"
 fi
 

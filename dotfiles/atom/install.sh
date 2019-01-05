@@ -1,19 +1,18 @@
-#!bin/sh
-#Use -c option for clean installation
-
-#Before the installation will be create a backup file:
-apm list --installed --bare > package-list.bcp
-echo "Backup created!"
+#!/bin/sh
 
 
-if [$1 == "-c"]; then
-    #Full atom clean
-    apm clean
-fi
+if test "$(which apm)"; then
+  echo "Going to install iTzAtom x xMentos5091's Atom packages on TOP of yours"
 
-if [-f package-list]; then
-    #Now you can install a new plugin configuration:
-    apm install --packages-file package-list
+  echo "Backuping your packages."
+  apm list --installed --bare > packages-list.bk
+  echo "Backup created!"
+
+  if [ -f packages-list ]; then
+    apm install --packages-file packages-list
+  fi
+
+  echo "If want to restore yours launch restore.sh inside this folder."
 else
-    echo "Error: No such file package-list"
+  echo "Install Atom from: https://atom.io/"
 fi
