@@ -65,7 +65,7 @@ dependencies_installer(){
   fi
 }
 install_all_the_scripts(){
-  git ls-tree --name-only -r osx | grep install.sh | while read -r installer; do
+  git ls-tree --name-only -r master | grep install.sh | while read -r installer; do
 	  echo "${installer}..."
 	  sh -c "$installer $(pwd)"
   done
