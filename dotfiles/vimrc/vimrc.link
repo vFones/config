@@ -6,17 +6,18 @@ Plug 'vim-airline/vim-airline'
 Plug 'mbbill/undotree'
 Plug 'scrooloose/nerdtree'
 Plug 'vim-syntastic/syntastic'
-Plug 'dracula/vim'
 Plug 'morhetz/gruvbox'
-Plug 'junegunn/limelight.vim'
 Plug 'davidhalter/jedi-vim'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'Yggdroot/indentLine'
+Plug 'jeetsukumaran/vim-buffergator'
 call plug#end()
 filetype plugin indent on
 syntax on
 
 let g:gruvbox_italic=1
 let g:gruvbox_termcolors=256
-"set termguicolors
+set termguicolors
 set bg=dark
 colorscheme gruvbox
 
@@ -28,10 +29,12 @@ set incsearch hlsearch mouse=a
 
 let mapleader=","
 imap CapsLock <ESC>
+
 nnoremap <leader>u :UndotreeShow<CR>
-nnoremap <leader>n :NERDTreeToggle<CR>
-nnoremap <leader>l :Limelight<CR>
-nnoremap <leader>k :Limelight!<CR>
+nmap <silent> <S-n> :bp <CR>
+nmap <silent> <S-m> :bn <CR>
+nmap <silent> <S-b> :bd <CR>
+noremap <leader>n :NERDTreeToggle<CR>
 nmap <silent> <C-Up> :wincmd k<CR>
 nmap <silent> <C-Down> :wincmd j<CR>
 nmap <silent> <C-Left> :wincmd h<CR>
@@ -46,11 +49,23 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-let g:limelight_conceal_ctermfg='grey'
-
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline_powerline_fonts = 1
+
+
+" Setup some default ignores
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](\.(git|hg|svn)|\_site)$',
+  \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$',
+\}
+
+" Ignore files in .gitignore
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+
+" 'a' - the directory of the current file, unless it is a subdirectory of the cwd
+" 'r' - the nearest ancestor of the current file that contains one of these directories or files: .git
+let g:ctrlp_working_path_mode = 'r'
 
 
 if empty(glob('~/.vim/autoload/plug.vim'))

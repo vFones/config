@@ -35,9 +35,9 @@ timepos="x+640:h-360"
 indpos="x+740:h-360"
 
 if [ "${resX}x${resY}" == "${nresX}x${nresY}" ]; then
-  wall=$HOME/Nextcloud/Immagini/Wallpaper/i3.jpg
+  wall=$HOME/Nextcloud/Pictures/Wallpaper/i3.jpg
 else
-  wall=$HOME/Nextcloud/Immagini/Wallpaper/space.png
+  wall=$HOME/Nextcloud/Pictures/Wallpaper/space.png
 fi
 
 killall -SIGUSR1 dunst # pause

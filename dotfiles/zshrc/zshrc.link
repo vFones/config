@@ -1,6 +1,7 @@
 ## SHELLS VARS
 export TERM="xterm-256color"
 export EDITOR="vim"
+export VISUAL="vim"
 
 ## HISTORY VARS
 export HISTFILE="$HOME/.zsh_history"
@@ -163,3 +164,4 @@ POWERLEVEL9K_CONTEXT_DEFAULT_BACKGROUND="$DEFAULT_BACKGROUND"
 source ~/.zsh_plugins.sh
 # Launch this in term to update antibody plugins:
 ## antibody bundle < ~/.zsh_plugins.txt > ~/.zsh_plugins.sh
+ufetch
