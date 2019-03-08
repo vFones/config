@@ -164,4 +164,3 @@ POWERLEVEL9K_CONTEXT_DEFAULT_BACKGROUND="$DEFAULT_BACKGROUND"
 source ~/.zsh_plugins.sh
 # Launch this in term to update antibody plugins:
 ## antibody bundle < ~/.zsh_plugins.txt > ~/.zsh_plugins.sh
-ufetch
