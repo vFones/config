@@ -15,25 +15,26 @@ call plug#end()
 filetype plugin indent on
 syntax on
 
+set encoding=utf-8
 let g:gruvbox_italic=1
 let g:gruvbox_termcolors=256
 set termguicolors
 set bg=dark
 colorscheme gruvbox
 
-filetype indent on 
+filetype indent on
 
 set tabstop=8 softtabstop=0 expandtab shiftwidth=2 smarttab
 set number showcmd wildmenu lazyredraw showmatch cursorline
 set incsearch hlsearch mouse=a
 
 let mapleader=","
-imap CapsLock <ESC>
+set backspace=indent,eol,start
 
 nnoremap <leader>u :UndotreeShow<CR>
-nmap <silent> <S-n> :bp <CR>
-nmap <silent> <S-m> :bn <CR>
-nmap <silent> <S-b> :bd <CR>
+nmap <silent> <C-n> :bp <CR>
+nmap <silent> <C-m> :bn <CR>
+nmap <silent> <C-b> :bd <CR>
 noremap <leader>n :NERDTreeToggle<CR>
 nmap <silent> <C-Up> :wincmd k<CR>
 nmap <silent> <C-Down> :wincmd j<CR>
@@ -53,23 +54,8 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline_powerline_fonts = 1
 
-
-" Setup some default ignores
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](\.(git|hg|svn)|\_site)$',
-  \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$',
-\}
-
-" Ignore files in .gitignore
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-
-" 'a' - the directory of the current file, unless it is a subdirectory of the cwd
-" 'r' - the nearest ancestor of the current file that contains one of these directories or files: .git
-let g:ctrlp_working_path_mode = 'r'
-
-
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif

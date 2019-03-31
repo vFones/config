@@ -1,4 +1,7 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 echo "Linking vim to home..."
-ln -s -f $1/vimrc/vimrc.link $HOME/.vimrc
+ln -s -f -v $PWD/dotfiles/vimrc/vimrc.link $HOME/.vimrc
+
+vim +'PlugInstall --sync' +qa
+vim +'PlugUpdate' +qa
