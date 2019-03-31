@@ -96,6 +96,7 @@ if (( $distro > 0 )); then
   if (( $distro == 1 )); then
     #macosx installation
     basic 0
+    sh -c "$PWD/osx.sh"
   else
     #arch linux stuff
     if (( $full_flag == 1 )); then

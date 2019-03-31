@@ -5,8 +5,7 @@ defaults write com.apple.dock expose-animation-duration -float 0.1
 defaults write com.apple.dock "expose-group-by-app" -bool true
 
 # Disable keys opening itunes
-launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist
-
+launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist >/dev/null 2>&1
 # keys and mouse staff
 defaults write -g ApplePressAndHoldEnabled -bool false
 defaults write NSGlobalDomain KeyRepeat -int 2
