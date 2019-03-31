@@ -1,7 +1,7 @@
+! GRUVBOX
+
 ##dark 262626 light a89984
-
 *background: #262626
-
 *foreground: #a89984
 
 ! Colors 0-15.
@@ -17,7 +17,7 @@
 ! yellow
 *color3:  #d79921
 *color11: #fabd2f
-! blue 
+! blue
 *color4:  #458588
 *color12: #83a598
 ! magenta
