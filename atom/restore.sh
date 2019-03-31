@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [ -f packages-list.bk ]; then
   apm clean
@@ -6,4 +6,3 @@ if [ -f packages-list.bk ]; then
 else
   echo "Error: No such file package-list.bk"
 fi
-

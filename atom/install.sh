@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if test "$(which apm)"; then
   echo "Going to install iTzAtom x xMentos5091's Atom packages on TOP of yours"
