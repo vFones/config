@@ -3,9 +3,9 @@
 BACKUPFOLDER=$(mkdir -pv "$PWD/backup/$(date +%F__%H:%M:%S)" | awk '{print $4}' | tr -d "'")
 MNMLCONF="tmux.conf vimrc zshrc"
 FULLCONF=$(ls dotfiles)
-MNMLDEP="antibody fzy vim tmux diff-so-fancy ranger zsh neofetch"
-FULLDEP=('compton' 'dunst' 'i3-gaps' 'polybar' 'termite' 'xresources' 'redshift' 'xidlehook'
-'i3lock-color-git' 'feh' 'hsetroot' 'rofi')
+MNMLDEP="antibody fzy vim tmux diff-so-fancy ranger zsh neofetch diff-so-fancy"
+FULLDEP="compton dunst i3-gaps polybar termite xresources redshift
+diff-so-fancy xidlehook i3lock-color-git feh hsetroot rofi"
 
 
 __minimum_requirements(){
@@ -104,5 +104,6 @@ if (( $distro > 0 )); then
       basic 1
     fi
   fi
+  git config --global core.pager "diff-so-fancy | less --tabs=2 -RFX"
   echo "Bye bye..."
 fi

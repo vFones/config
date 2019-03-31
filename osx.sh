@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# animation faster
+defaults write com.apple.dock expose-animation-duration -float 0.1
+defaults write com.apple.dock "expose-group-by-app" -bool true
+
+# Disable keys opening itunes
+launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist
+
+# keys and mouse staff
+defaults write -g ApplePressAndHoldEnabled -bool false
+defaults write NSGlobalDomain KeyRepeat -int 2
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
+defaults write com.apple.BezelServices kDimTime -int 300
+defaults write -g com.apple.trackpad.scaling 2
+defaults write -g com.apple.mouse.scaling 2.5
+
+# ask for password
+defaults write com.apple.screensaver askForPassword -int 1
+defaults write com.apple.screensaver askForPasswordDelay -int 0
+
+defaults write com.apple.finder ShowPathbar -bool true
+
+sudo pmset -a standbydelay 7200 # 2 hour of no deep sleep
+sudo pmset -a sms 0 #motion sensor
+sudo pmset -a hibernatemode 0 #disable hibernatemode
