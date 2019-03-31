@@ -1,17 +1,54 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-DOTS=$PWD/dotfiles/
+BACKUPFOLDER=$(mkdir -pv "$PWD/backup/$(date +%F__%H:%M:%S)" | awk '{print $4}' | tr -d "'")
+MNMLCONF="tmux.conf vimrc zshrc"
+FULLCONF=$(ls dotfiles)
+MNMLDEP="antibody fzy vim tmux diff-so-fancy ranger zsh neofetch"
+FULLDEP=('compton' 'dunst' 'i3-gaps' 'polybar' 'termite' 'xresources' 'redshift' 'xidlehook'
+'i3lock-color-git' 'feh' 'hsetroot' 'rofi')
 
-if test "$(uname)" = "Darwin"; then
-  BACKUPFOLDER=$(gmkdir -pv "$PWD/backup/$(date +%F__%H:%M:%S)" | awk '{print $4}' | tr -d "'")
-else
-  BACKUPFOLDER=$(mkdir -pv "$PWD/backup/$(date +%F__%H:%M:%S)" | awk '{print $4}' | tr -d "'")
-fi
 
-backuper(){
-  cd $1
-  for dotfile in $(ls);
-  do
+__minimum_requirements(){
+  if test "$(uname)" = "Darwin"; then
+    echo "****************************************"
+    echo "*************** MAC OSX ****************"
+    echo "****************************************"
+    if test ! $(which gcc); then
+      echo "Installing xcode..."
+      xcode-select --install
+    fi
+    if test "$(which brew)"; then
+      brew update
+    else
+      echo "Installing homebrew..."
+      ruby -e "$(curl -fsSL \
+        https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    fi
+    distro=1
+  else
+    if test "$(uname -r)" | grep "ARCH"; then
+      echo "****************************************"
+      echo "************* ARCH LINUX ***************"
+      echo "****************************************"
+      if test $(which yay); then
+        yay -Suy
+        distro=2
+      else
+        echo "Using Arch w/o yay? REALLY?!"
+      fi
+    else
+      echo "****************************************"
+      echo "*********  Unsupported Distro  *********"
+      echo "****************************************"
+    fi
+  distro=0
+  fi
+}
+
+
+backup(){
+  echo "Going to backup: $1"
+  for dotfile in $1; do
     if [[ $dotfile == config_* ]]; then
       tmp="$HOME/.config/${dotfile#config_*}"
     else
@@ -24,55 +61,48 @@ backuper(){
         echo "****************************************"
         echo "$dotfile is a symlink, GOING TO OVERRIDE"
         echo "****************************************"
-        continue
       fi
-    else
-      continue
     fi
   done
 }
 
-dependencies_installer(){
-  if test "$(uname)" = "Darwin"; then
-    if test ! $(which gcc); then
-      echo "Installing xcode..."
-      xcode-select --install
-    fi
-    if test "$(which brew)"; then
-      brew update
-      brew install coreutils fzy getantibody/tap/antibody vim tmux
-    else
-      echo "Installing homebrew..."
-      ruby -e "$(curl -fsSL \
-        https://raw.githubusercontent.com/Homebrew/install/master/install)"
-      brew install coreutil fzy getantibody/tap/antibody vim tmux
-    fi
+
+full(){
+  backup "$FULLCONF"
+  yay -S $MNMLDEP $FULLDEP
+  git ls-tree --name-only -r master | grep install.sh | \
+  while read -r installer; do
+	  echo "${installer}..."
+	  sh -c "$installer"
+  done
+}
+
+
+basic(){
+  backup "$MNMLCONF"
+  if (( $1 == 0 )); then
+    brew install $MNMLDEP
   else
-    if test "$(uname -r)" | grep "ARCH"; then
-      if test $(which yay); then
-        yay -Suy
-        yay -S fzy zsh antibody i3-gaps compton tmux dunst polybar termite \
-          redshift xidlehook i3lock-color-git feh hsetroot rofi
-      else
-        echo "Using Arch w/o yay? REALLY?!"
-      fi
+    yay -S $MNMLDEP
+  fi
+  for el in $MNMLCONF; do
+    sh -c "dotfiles/$el/install.sh"
+  done
+}
+
+
+__minimum_requirements
+if (( $distro > 0 )); then
+  if (( $distro == 1 )); then
+    #macosx installation
+    basic 0
+  else
+    #arch linux stuff
+    if (( $full_flag == 1 )); then
+      full
     else
-      echo "Good luck in esports w Debian based distro"
-      sudo apt update && sudo apt install -y vim zsh i3 dunst
-      echo " "
-      echo "those are not enough, install antibody at least for zsh"
+      basic 1
     fi
   fi
-}
-install_all_the_scripts(){
-  git ls-tree --name-only -r master | grep install.sh | while read -r installer; do
-	  echo "${installer}..."
-	  sh -c "$installer $(pwd)"
-  done
-}
-backuper $DOTS
-dependencies_installer
-install_all_the_scripts
-
-vim +'PlugInstall --sync' +qa
-vim +'PlugUpdate' +qa
+  echo "Bye bye..."
+fi
