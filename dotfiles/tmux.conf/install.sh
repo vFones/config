@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 echo "Linking tmux to home..."
-ln -s -f $1/tmux.conf/tmux.link $HOME/.tmux.conf
+ln -s -f -v $PWD/dotfiles/tmux.conf/tmux.link $HOME/.tmux.conf
