@@ -7,6 +7,8 @@ MNMLDEP="antibody fzy vim tmux diff-so-fancy ranger zsh neofetch diff-so-fancy"
 FULLDEP="compton dunst i3-gaps polybar termite xresources redshift
 diff-so-fancy xidlehook i3lock-color-git feh hsetroot rofi"
 
+#TODO: fullflag with opt
+full_flag=0
 
 __minimum_requirements(){
   if test "$(uname)" = "Darwin"; then
@@ -26,22 +28,22 @@ __minimum_requirements(){
     fi
     distro=1
   else
-    if test "$(uname -r)" | grep "ARCH"; then
+    if test '$(uname -r) | grep -e "ARCH|MANJARO" '; then
       echo "****************************************"
       echo "************* ARCH LINUX ***************"
       echo "****************************************"
       if test $(which yay); then
         yay -Suy
-        distro=2
       else
         echo "Using Arch w/o yay? REALLY?!"
       fi
+      distro=2
     else
       echo "****************************************"
       echo "*********  Unsupported Distro  *********"
       echo "****************************************"
+      distro=0
     fi
-  distro=0
   fi
 }
 
