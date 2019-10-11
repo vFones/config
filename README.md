@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://i.imgur.com/kBR2hGj.png">
+  <img src="https://i.imgur.com/aMlY0sF.png">
 </p>
 
 # Atom's rice
