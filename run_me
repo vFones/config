@@ -1,0 +1,124 @@
+#!/bin/bash
+
+BACKUPFOLDER=$(mkdir -pv "$PWD/backup/$(date +%F__%H:%M:%S)" | awk '{print $4}' | tr -d "'")
+DOTFILES=$(ls dotfiles)
+DEP="antibody fzy vim tmux diff-so-fancy ranger zsh neofetch"
+
+
+__minimum_requirements()
+{
+  case $1 in
+    mac)
+      echo "****************************************"
+      echo "*************** MAC OSX ****************"
+      echo "****************************************"
+      if test ! $(which gcc); then
+        echo "Installing xcode..."
+        xcode-select --install
+      fi
+      if test "$(which brew)"; then
+        brew update
+      else
+        echo "Installing homebrew..."
+        ruby -e "$(curl -fsSL \
+          https://raw.githubusercontent.com/Homebrew/install/master/install)"
+      fi
+      distro=1
+      ;;
+
+    arch | manjaro)
+      echo "****************************************"
+      echo "************* ARCH LINUX ***************"
+      echo "****************************************"
+      if test $(which yay); then
+        yay -Suy
+      else
+        echo "Using Arch w/o yay? REALLY?!"
+        exit 1
+      fi
+      distro=2
+      ;;
+
+    ubuntu | debian)
+      echo "****************************************"
+      echo "**************  Ubuntu  ****************"
+      echo "****************************************"
+      distro=0
+      ;;
+    *)
+      echo -n "Unsupported distro, pls feel free to contribute."
+      exit 1
+  esac
+}
+
+
+__backup()
+{
+  echo "Going to backup:"; echo "$DOTFILES"
+  for dotfile in $DOTFILES; do
+    tmp="$HOME/.$dotfile"
+    if [ -e "$tmp" ]; then
+      if [ ! -L "$tmp" ]; then
+        mv $tmp $BACKUPFOLDER
+      else
+        echo "****************************************"
+        echo "$dotfile is a symlink, install to override symlink"
+        echo "****************************************"
+      fi
+    fi
+  done
+}
+
+
+__install()
+{
+  case $1 in
+    1)
+      brew install $DEP
+      sh -c "$PWD/osx"
+      ;;
+
+    2)
+      yay -S $DEP
+      ;;
+
+    0)
+      sudo apt update && sudo apt upgrade
+      sudo apt install fzy tmux vim ranger zsh neofetch git curl wget
+      curl -sfL git.io/antibody | sudo sh -s - -b /usr/local/bin
+      git clone https://github.com/so-fancy/diff-so-fancy /tmp/
+      sudo cp /tmp/diff-so-fancy/diff-so-fancy /usr/bin/
+      sudo mkdir -p /usr/share/diff-so-fancy/
+      sudo cp /tmp/diff-so-fancy/lib/DiffHighlight.pm /usr/share/diff-so-fancy/
+      ;;
+
+    *)
+      echo -n "Unsupported distro, pls feel free to contribute."
+      exit 1
+  esac
+  for el in $DOTFILES; do
+    sh -c "dotfiles/$el/install.sh"
+  done
+  git config --global core.pager "diff-so-fancy | less --tabs=2 -RFX"
+}
+
+
+case $1 in
+  install)
+    echo -n "Installing everything under dotfiles folder..."
+    __minimum_requirements $2
+    __install $distro
+    ;;
+
+  backup)
+    echo -n "Backuping..."
+    __backup
+    ;;
+
+  *)
+    echo -n "Usage: $0 {install <mac|arch|ubuntu>|backup}"
+    echo -n " "
+    exit 1
+esac
+
+echo "Bye bye..."

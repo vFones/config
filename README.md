@@ -8,16 +8,14 @@ Using this configuration on my MacBook Pro mid 2012 running Arch/MacOS, Acer Chr
 Using scripts written in bash to keep things automated.
 Making backup before replacing with symbolic link or replace symlink if relaunching script.
 
+### Usage
+run run_me script and specify if want to backup or install. If want to install select also OS.
 
-### Compatibility
-script.sh works on:
-* MacOS High Sierra (tested script.sh)
-* [Arch](https://i.imgur.com/gjNNJV1.png) (Not tested script.sh) 
-* Debian Based - only if you got all dependencies built and installed (Not tested)
+tested on 
+* Ubuntu
 
 ### TODO
-* More automation
-* Bug fixes
+* Restore function
 
 ### Inspirations
 * [/r/unixporn](https://reddit.com/r/unixporn) for theme, walls and stuff.

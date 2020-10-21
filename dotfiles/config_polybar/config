@@ -1,6 +1,0 @@
-include-file = $HOME/.config/polybar/bars/top
-include-file = $HOME/.config/polybar/bars/bottom
-include-file = $HOME/.config/polybar/modules/colors
-include-file = $HOME/.config/polybar/modules/info
-include-file = $HOME/.config/polybar/modules/scripts
-include-file = $HOME/.config/polybar/modules/system
