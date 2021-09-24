@@ -2,7 +2,7 @@
 
 BACKUPFOLDER=$(mkdir -pv "$PWD/backup/$(date +%F__%H:%M:%S)" | awk '{print $4}' | tr -d "'")
 DOTFILES=$(ls dotfiles)
-DEP="antibody fzy vim tmux diff-so-fancy ranger zsh neofetch"
+DEP="antibody fzy fzf vim tmux diff-so-fancy ranger zsh neofetch"
 
 
 __minimum_requirements()
