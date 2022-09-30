@@ -2,7 +2,7 @@
 
 BACKUPFOLDER=$(mkdir -pv "$PWD/backup/$(date +%F__%H:%M:%S)" | awk '{print $4}' | tr -d "'")
 DOTFILES=$(ls dotfiles)
-DEP="antibody fzy fzf vim tmux diff-so-fancy ranger zsh neofetch"
+DEP="cantino/mcfly/mcfly antibody fzy fzf vim tmux diff-so-fancy ranger zsh neofetch"
 
 
 __minimum_requirements()
@@ -74,9 +74,12 @@ __install()
 {
   case $1 in
     1)
+      brew tap cantino/mcfly
       brew install $DEP
+      
       sh -c "$PWD/osx"
-      ;;
+
+     ;;
 
     2)
       yay -S $DEP
@@ -84,18 +87,20 @@ __install()
 
     0)
       sudo apt update && sudo apt upgrade
-      sudo apt install fzy tmux vim ranger zsh neofetch git curl wget
+      sudo apt install fzf tmux vim ranger zsh neofetch git curl wget
+      sudo snap diff-so-fancy
       curl -sfL git.io/antibody | sudo sh -s - -b /usr/local/bin
-      git clone https://github.com/so-fancy/diff-so-fancy /tmp/
-      sudo cp /tmp/diff-so-fancy/diff-so-fancy /usr/bin/
-      sudo mkdir -p /usr/share/diff-so-fancy/
-      sudo cp /tmp/diff-so-fancy/lib/DiffHighlight.pm /usr/share/diff-so-fancy/
       ;;
 
     *)
       echo -n "Unsupported distro, pls feel free to contribute."
       exit 1
   esac
+  # fzf-tab
+  _comp_options+=(globdots) # enable hidden files completion
+  zstyle ':completion:*' special-dirs false
+  zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always --icons $realpath'
+  zstyle ':fzf-tab:*' continuous-trigger 'right'
   for el in $DOTFILES; do
     sh -c "dotfiles/$el/install.sh"
   done
