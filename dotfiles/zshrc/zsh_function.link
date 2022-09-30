@@ -6,7 +6,7 @@ function template()
       mkdir $2
       cp $template/$1/* $2/
       cd $2
-      k
+      exa -l
     fi
   fi
 }

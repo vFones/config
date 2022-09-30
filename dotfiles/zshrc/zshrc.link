@@ -25,42 +25,66 @@ compinit
 ## ENHANCD VARS
 ENHANCD_FILTER="fzy"
 ENHANCD_COMMAND="cd"
-ENHANCD_DISABLE_DOT=1
+ENHANCD_DISABLE_DOT=0
+
+# OH-MY-ZSH VARS
+# remember to remove in lib alias that dont want to be overwritten
+DISABLE_LS_COLORS="true"
 
 ###############
 ##  ALIASES  ##
 ###############
 alias q="exit"
 alias vi="vim"
+alias vimrc="vi ~/.vimrc"
 alias vimconf="vi ~/.vimrc"
+alias zshrc="vi ~/.zshrc"
 alias zshconf="vi ~/.zshrc"
-alias ls="ls"
-alias sl="ls"
-alias ll="ls -lh"
-alias la="ls -lah"
-alias ka="k -a"
+alias ls="exa --color=auto --icons"
+alias sl="exa --color=auto --icons"
+alias ll="exa -lh --color=auto --icons"
+alias la="exa -lah --color=auto --icons"
 alias ..="cd .."
 alias ...="cd ../.."
 alias nf="neofetch --bold off --block_range 0 7 --colors 4 6 8 3 5 7"
 
 
 ###### ANTIBODY Dynamic loading
-# source <(antibody init)
-# antibody bundle < ~/.zsh_plugins
+#source <(antibody init)
+#antibody bundle < ~/.zsh_plugins
 
 ###### ANTIBODY Static loading
-## update with `antibody bundle < ~/.zsh_plugins > ~/.zsh_plugins.sh`
+#update with `antibody bundle < ~/.zsh_plugins > ~/.zsh_plugins.sh`
 source ~/.zsh_plugins.sh
 
 source $ANTIBODY_HOME/https-COLON--SLASH--SLASH-github.com-SLASH-martinrotter-SLASH-powerless/powerless.zsh
 
 
 if [ "$(uname -s)" = "Darwin" ]; then
+  #if [[ "$(defaults read -g AppleInterfaceStyle 2&>/dev/null)" != "Dark" ]]; then
+    #export MCFLY_LIGHT=TRUE
+  #fi
   #source ~/.iterm2_shell_integration.zsh
   source $HOME/.vim/plugged/gruvbox/gruvbox_256palette.sh
   #export TERM=xterm-256color-italic
+  export JAVA_HOME=$(/usr/libexec/java_home -v1.8.0_201)
+  export JBOSS_HOME=$HOME/GvServer-3.4.0.13.Final/jboss-5.1.0.GA
+  export GV_SERVER=$JBOSS_HOME/server/GreenV
+  export GV_HOME=$HOME/GvServer-3.4.0.13.Final/GreenV
+  export CLASSPATH=$GV_HOME/xmlconfig
+
+  export PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin:$PATH"
   export PATH="/usr/local/opt/opencv@2/bin:$PATH"
   export PATH="/usr/local/opt/qt/bin:$PATH"
+  alias pip="pip3"
+  if type brew &>/dev/null
+    then
+    FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+    autoload -Uz compinit
+    compinit
+  fi
 else
   export PATH=/usr/local/apache-maven-3.8.6/bin:$PATH
 fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
