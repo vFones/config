@@ -1,7 +1,13 @@
-robbyrussell/oh-my-zsh path:lib
-robbyrussell/oh-my-zsh path:plugins/colored-man-pages
-robbyrussell/oh-my-zsh path:plugins/sudo
+ohmyzsh/ohmyzsh path:lib
+ohmyzsh/ohmyzsh path:plugins/colored-man-pages
+ohmyzsh/ohmyzsh path:plugins/command-not-found
+ohmyzsh/ohmyzsh path:plugins/sudo
+ohmyzsh/ohmyzsh path:plugins/zsh-interactive-cd
 
-zdharma/fast-syntax-highlighting
-martinrotter/powerless
+zsh-users/zsh-syntax-highlighting
+zsh-users/zsh-autosuggestions
+zsh-users/zsh-history-substring-search
+
+zdharma-continuum/fast-syntax-highlighting
+romkatv/powerlevel10k
 Aloxaf/fzf-tab
