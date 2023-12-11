@@ -1,16 +1,22 @@
 #!/bin/bash
-set -x
+
+POS="--right-of"
+if [[ $1 == "left" ]]; then
+  POS="--left-of"
+elif [[ $1 == "up" ]]; then
+  POS="--below"
+fi
+
 status=`xrandr --prop | grep HDMI-1 | awk '{ print $2 }'`
 
-is_high_rate=`xrandr --prop | grep 144.00 |  awk '{ print $3 }'`
-RATE=60
-if [ $is_high_rate == "144.00" ]; then
-  RATE=144
-fi
- 
-if [ $status == "connected" ]; then
-  xrandr --output eDP-1 --mode 1920x1080 --pos 2087x108 --rotate normal --output HDMI-1 --rate $RATE --primary --mode 1920x1080 --pos 167x108 --rotate normal --output DP-1 --off --output DP-2 --off --output DP-3 --off
+if [[ $status == "connected" ]]; then
+  if [[ $1 == "disabled" ]]; then
+    xrandr --output eDP-1 --off --output HDMI-1 --auto
+  else
+    xrandr --output eDP-1 --mode 1920x1080 --rotate normal $POS HDMI-1 --output HDMI-1 --auto
+  fi
 else
   xrandr --auto &2>/dev/null
 fi
 
+$HOME/.config/polybar/launch.sh

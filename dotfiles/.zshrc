@@ -9,6 +9,7 @@ fi
 export TERM="xterm-256color"
 export EDITOR="vim"
 export VISUAL="vim"
+export PAGER="less --mouse"
 
 ## HISTORY VARS
 export HISTFILE="$HOME/.zsh_history"
@@ -52,10 +53,13 @@ alias ...="cd ../.."
 alias nf="neofetch --bold off --block_range 0 7 --colors 4 6 8 3 5 7"
 alias gitadog="git log --all --decorate --oneline --graph"
 alias cat="batcat --paging=never"
+
 ###### ANTIDOTE Static loading
 source ${ZDOTDIR:-~}/.antidote/antidote.zsh
 antidote load ~/.zsh_plugins
 
+#compatibility before release 2.0 of antidote
+zstyle ':antidote:compatibility-mode' 'antibody'
 # set descriptions format to enable group support
 zstyle ':completion:*:descriptions' format '[%d]'
 # set list-colors to enable filename colorizing
@@ -64,6 +68,11 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
 # switch group using `,` and `.`
 zstyle ':fzf-tab:*' switch-group ',' '.'
+
+zstyle ':fzf-tab:*' continuous-trigger 'right'
+
+_comp_options+=(globdots) # enable hidden files completion
+zstyle ':completion:*' special-dirs false
 
 # give a preview of commandline arguments when completing `kill`
 zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
@@ -81,7 +90,6 @@ unsetopt correct_all
 setopt correct
 
 if [ "$(uname -s)" = "Darwin" ]; then
-  source $HOME/.vim/plugged/gruvbox/gruvbox_256palette.sh
   alias pip="pip3"
   if type brew &>/dev/null
     then

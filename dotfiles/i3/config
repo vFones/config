@@ -11,7 +11,7 @@ floating_modifier $mod
 bindsym $mod+Return exec kitty
 
 # Kill focused window
-bindsym $mod+Shift+q kill
+bindsym --release $mod+Shift+q exec xkill
 
 # Change focus
 bindsym $mod+Left focus left
@@ -25,8 +25,8 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-bindsym $mod+Ctrl+greater move workspace to output right
-bindsym $mod+Ctrl+less move workspace to output left
+bindsym $mod+Ctrl+o move workspace to output next
+bindsym $mod+Ctrl+p move workspace to output prev
 
 # Split in horizontal/vertical orientation
 bindsym $mod+h split h
@@ -84,9 +84,6 @@ bindsym $mod+Shift+r restart
 focus_follows_mouse  yes
 for_window [class=".*"] border pixel 1
 smart_borders on
-
-workspace 9 output eDP-1
-workspace 0 output eDP-1
 
 # GAP VARIABLES
 set $inner 10
@@ -162,37 +159,41 @@ bindsym $mod+r mode "resize"
 bindsym $mod+l exec $HOME/.config/i3/lock.sh
 bindsym $mod+Shift+l exec xset dpms force suspend 
 bindsym $mod+b exec $HOME/.config/i3/stats.sh
-bindsym $mod+p exec $HOME/.config/i3/xrandr.sh
-bindsym $mod+k exec $HOME/.config/polybar/launch.sh
+
+bindsym $mod+a exec $HOME/.config/i3/xrandr.sh "left"
+bindsym $mod+d exec $HOME/.config/i3/xrandr.sh
+bindsym $mod+w exec $HOME/.config/i3/xrandr.sh "up"
+bindsym $mod+s exec $HOME/.config/i3/xrandr.sh "disabled"
+
+bindsym $mod+k exec $HOME/.config/polybar/launch.sh 
 bindsym $mod+BackSpace exec ~/.config/i3/rofi.sh 
 bindsym F1 exec rofi -show window -theme $HOME/.config/polybar/scripts/rofi/styles.rasi
 bindsym $mod+Shift+h exec rofi -modi "clipboard:$HOME/.local/bin/greenclip print" -show clipboard -run-command '{cmd}' -theme $HOME/.config/polybar/scripts/rofi/styles.rasi
 
 
 bindsym $mod+i exec setxkbmap -layout it
-bindsym $mod+u exec setxkbmap -layout us
+bindsym $mod+u exec setxkbmap -layout us -option compose:rctrl
 
 # Bars and applets
-exec --no-startup-id $HOME/.config/i3/xrandr.sh 
-exec --no-startup-id $HOME/.config/polybar/launch.sh
-exec --no-startup-id blueman-applet
-exec --no-startup-id udiskie -ANs
+exec --no-startup-id $HOME/.config/i3/xrandr.sh &
+exec --no-startup-id $HOME/.config/polybar/launch.sh &
+exec --no-startup-id blueman-applet &
+exec --no-startup-id udiskie -ANt &
 
 # Backend stuff
-exec --no-startup-id dunst -config ~/.config/dunst/dunstrc -history
-exec --no-startup-id picom --config ~/.config/picom/picom.conf
-exec --no-startup-id xrdb -load .Xresources
+exec --no-startup-id dunst -config ~/.config/dunst/dunstrc -history &
+exec --no-startup-id picom --config ~/.config/picom/picom.conf &
+exec --no-startup-id xrdb -load .Xresources &
 exec --no-startup-id xss-lock -- ~/.config/i3/lock.sh
-exec --no-startup-id greenclip daemon
-exec --no-startup-id powerprofilesctl performance
+exec --no-startup-id greenclip daemon &
+exec --no-startup-id powerprofilesctl performance &
 #exec --no-startup-id redshift -l 40.517:14.165 -t 6400:4500 2>&2 > /dev/null &
 
 # Lockscreen timeout
-exec --no-startup-id xidlehook --not-when-fullscreen \
-  --not-when-audio --timer normal 300 \
-  'light -S 30' '' --timer primary 600 \
-  '~/.config/i3/lock.sh' '' \
-  --timer normal 5 'xset dpms force off' '' & 
+exec --no-startup-id xidlehook --not-when-fullscreen\
+ --not-when-audio\
+ --timer normal 300 'light -S 30' ''\
+ --timer primary 600  '~/.config/i3/lock.sh' '' --timer normal 5 'xset dpms force off' '' & 
 
 for_window [class="Yad" title="yad-calendar"] floating enable
 for_window [class="dolphin" instance="dolphin"] floating enable
@@ -214,8 +215,9 @@ for_window [window_role="pop-up"] floating enable
 # for_window [class="Konsole"] border enable;
 
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id easyeffects --gapplication-service &
 
 # Setup wallpaper (if commented probably using nitrogen)
 exec_always --no-startup-id exec hsetroot -add "#c79081" -add "#dfa579" -gradient 0
-exec_always --no-startup-id exec feh --bg-scale ~/Pictures/Wallpaper/IMG_7750.JPG
+exec_always --no-startup-id exec feh --bg-scale ~/Pictures/Wallpaper/IMG_7808.JPG
 
