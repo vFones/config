@@ -89,9 +89,7 @@ install_required()
       {
         sudo sed -i '1 i\auth       sufficient   pam_wheel.so trust group=chsh' /etc/pam.d/chsh && \
           sudo groupadd chsh && sudo usermod -a -G chsh `whoami` && \
-          sudo apt update && sudo apt install -y gpg-agent software-properties-common && \
-          sudo add-apt-repository ppa:aos1/diff-so-fancy -y && sudo apt update && \ 
-          sudo apt install -y fzf fzy i3 vim ranger zsh neofetch tree xclip bat exa rofi dolphin git nodejs curl wget diff-so-fancy curl wget less automake autoconf gcc libtool make pkg-config libpam0g-dev libcairo2-dev libfontconfig1-dev libxcb-composite0-dev libev-dev libx11-xcb-dev libxcb-xkb-dev libxcb-xinerama0-dev libxcb-randr0-dev libxcb-image0-dev libxcb-util-dev libxcb-xrm-dev libxkbcommon-dev libxkbcommon-x11-dev libjpeg-dev dunst && sudo apt upgrade -y && \
+          sudo apt update && sudo apt install -y gpg-agent software-properties-common fzf fzy i3 kitty firefox vim ranger zsh neofetch tree xclip bat exa rofi dolphin git nodejs curl wget curl wget less automake autoconf gcc libtool make pkg-config libpam0g-dev libcairo2-dev libfontconfig1-dev libxcb-composite0-dev libev-dev libx11-xcb-dev libxcb-xkb-dev libxcb-xinerama0-dev libxcb-randr0-dev libxcb-image0-dev libxcb-util-dev libxcb-xrm-dev libxkbcommon-dev libxkbcommon-x11-dev libjpeg-dev dunst && sudo apt upgrade -y && \
           git clone --depth=1 https://github.com/mattmc3/antidote.git ${ZDOTDIR:-$HOME}/.antidote && \
           git clone https://github.com/Raymo111/i3lock-color.git ${HOME}/.src/i3lock-color && \
           cd $HOME/.src/i3lock-color && ./install-i3lock-color.sh

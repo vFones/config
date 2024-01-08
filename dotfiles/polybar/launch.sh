@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 DIR="$HOME/.config/polybar"
 
 # Terminate already running bar instances
@@ -9,7 +11,7 @@ killall -q polybar
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
 if type "xrandr"; then
-  for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
-    MONITOR=$m polybar -r -q main -c "$DIR"/config.ini
+  for m in $(xrandr --query | grep " connected" | cut -d " " -f1); do
+    MONITOR=$m polybar -r -q main -c "$DIR"/config.ini &
   done
 fi

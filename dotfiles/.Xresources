@@ -36,3 +36,10 @@ Xcursor.size: 24
 *orange:  #d65d0e
 *lorange: #fe8019
 
+Xft.autohint: 0
+Xft.antialias: 1
+Xft.hinting: true
+Xft.hintstyle: hintslight
+Xft.dpi: 96
+Xft.rgba: rgb
+Xft.lcdfilter: lcddefault
