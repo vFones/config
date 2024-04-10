@@ -49,6 +49,8 @@ alias ...="cd ../.."
 alias nf="neofetch --bold off --block_range 0 7 --colors 4 6 8 3 5 7"
 alias gitadog="git log --all --decorate --oneline --graph"
 alias fzf='SHELL=bash fzf'
+alias bat='batcat'
+alias cat='batcat -p'
 
 ###### ANTIDOTE Static loading
 source ${ZDOTDIR:-~}/.antidote/antidote.zsh
@@ -68,10 +70,7 @@ setopt complete_aliases
 unsetopt correct_all  
 setopt correct
 
-LESSOPEN="|/usr/local/bin/lesspipe.sh %s"
-export LESSOPEN
 
-export LESSCOLORIZER='bat'
 
 if [ "$(uname -s)" = "Darwin" ]; then
   alias pip="pip3"
@@ -82,9 +81,14 @@ if [ "$(uname -s)" = "Darwin" ]; then
     compinit
   fi
 else
+  export LESSOPEN="|$(which lesspipe.sh) %s"
+  export LESSCOLORIZER='bat'
   export PATH="$PATH:$HOME/.cargo/bin"
-  export GOPATH="/usr/local/go"
+  export GOPATH="$HOME/.go"
   export PATH="$PATH:$GOPATH/bin"
+  export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+  export PATH=$PATH:/usr/local/go/bin
+  export GOPRIVATE="*"
 fi
 
 export PATH="$PATH:$HOME/.local/bin"
@@ -98,3 +102,8 @@ if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
   exec startx
 fi
 
+#export PATH="/home/vittorio/.krew/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/vittorio/.cargo/bin:/usr/local/go/bin:/home/vittorio/.local/bin:/home/vittorio/.fzf/bin:/home/vittorio/.cargo/bin:/usr/local/go/bin:/home/vittorio/.local/bin"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

@@ -179,7 +179,7 @@ exec --no-startup-id $HOME/.config/i3/xrandr.sh &
 exec --no-startup-id $HOME/.config/polybar/launch.sh &
 exec --no-startup-id blueman-applet &
 exec --no-startup-id udiskie -ANt &
-exec --no-startup-id nm-applet &
+#exec --no-startup-id nm-applet &
 
 # Backend stuff
 exec --no-startup-id dunst -config ~/.config/dunst/dunstrc -history &
@@ -191,9 +191,9 @@ exec --no-startup-id powerprofilesctl performance &
 #exec --no-startup-id redshift -l 40.517:14.165 -t 6400:4500 2>&2 > /dev/null &
 
 # Lockscreen timeout
-exec --no-startup-id xidlehook --not-when-fullscreen\
- --not-when-audio\
- --timer normal 300 'light -S 30' ''\
+exec --no-startup-id xidlehook --not-when-fullscreen \
+ --not-when-audio \
+ --timer normal 300 'light -S 30' '' \
  --timer primary 600  '~/.config/i3/lock.sh' '' --timer normal 5 'xset dpms force off' '' & 
 
 for_window [class="Yad" title="yad-calendar"] floating enable
@@ -224,3 +224,4 @@ exec_always --no-startup-id exec hsetroot -add "#c79081" -add "#dfa579" -gradien
 exec_always --no-startup-id exec feh --bg-fill ~/Pictures/Wallpaper/IMG_7934.JPG
 #exec_always --no-startup-id exec feh --bg-fill --geometry 0x1000 ~/Pictures/Wallpaper/IMG_7934.JPG
 
+exec --no-startup-id i3-battery-popup -l 5 -n 

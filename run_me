@@ -1,5 +1,4 @@
 #!/bin/bash
-
 set -x
 
 WORKDIR=$PWD
@@ -87,12 +86,19 @@ install_required()
 
     debian)
       {
-        sudo sed -i '1 i\auth       sufficient   pam_wheel.so trust group=chsh' /etc/pam.d/chsh && \
           sudo groupadd chsh && sudo usermod -a -G chsh `whoami` && \
-          sudo apt update && sudo apt install -y gpg-agent software-properties-common fzf fzy i3 kitty firefox vim ranger zsh neofetch tree xclip bat exa rofi dolphin git nodejs curl wget curl wget less automake autoconf gcc libtool make pkg-config libpam0g-dev libcairo2-dev libfontconfig1-dev libxcb-composite0-dev libev-dev libx11-xcb-dev libxcb-xkb-dev libxcb-xinerama0-dev libxcb-randr0-dev libxcb-image0-dev libxcb-util-dev libxcb-xrm-dev libxkbcommon-dev libxkbcommon-x11-dev libjpeg-dev dunst && sudo apt upgrade -y && \
+          sudo sed -i '1 i\auth       sufficient   pam_wheel.so trust group=chsh' /etc/pam.d/chsh && \
+          sudo usermod -a -G chsh `whoami` && \
+          sudo apt update && sudo apt install -y xdotool yad scrot gpg-agent polybar firefox software-properties-common fzf fzy i3 kitty vim ranger zsh neofetch tree xclip bat exa rofi dolphin git nodejs curl wget curl wget less git-delta automake autoconf gcc libtool make pkg-config libpam0g-dev libcairo2-dev libfontconfig1-dev libxcb-composite0-dev libev-dev dbus-x11 libx11-xcb-dev libxcb-xkb-dev libxcb-xinerama0-dev libxcb-randr0-dev libxcb-image0-dev libxcb-util-dev libxcb-xrm-dev libxkbcommon-dev libxkbcommon-x11-dev libjpeg-dev dunst lxpolkit easyeffects feh hsetroot blueman udiskie picom x11-xserver-utils && sudo apt upgrade -y && \
           git clone --depth=1 https://github.com/mattmc3/antidote.git ${ZDOTDIR:-$HOME}/.antidote && \
           git clone https://github.com/Raymo111/i3lock-color.git ${HOME}/.src/i3lock-color && \
-          cd $HOME/.src/i3lock-color && ./install-i3lock-color.sh
+          cd $HOME/.src/i3lock-color && ./install-i3lock-color.sh && \
+          curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin && \
+          ln -sf ~/.local/kitty.app/bin/kitty ~/.local/kitty.app/bin/kitten ~/.local/bin/ && \
+          cp ~/.local/kitty.app/share/applications/kitty.desktop ~/.local/share/applications/ && \
+          cp ~/.local/kitty.app/share/applications/kitty-open.desktop ~/.local/share/applications/ && \
+          sed -i "s|Icon=kitty|Icon=/home/$USER/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty*.desktop && \
+          sed -i "s|Exec=kitty|Exec=/home/$USER/.local/kitty.app/bin/kitty|g" ~/.local/share/applications/kitty*.desktop
       } || ERR_EXIT=1
       cd $WORKDIR
       ;;
@@ -116,7 +122,14 @@ apply_config() {
   done
 
   # fzf-tab
-  git config --global core.pager "diff-so-fancy | less --mouse --tabs=2 -RFX"
+  git config --global core.pager "delta"
+  git config --global interactive.diffFilter "delta --color-only"
+  git config --global delta.navigate true
+  git config --global delta.side-by-side true
+  git config --global hyperlinks true
+  git config --global merge.conflictstyle "diff3"
+  git config --global diff.colorMoved "default"
+
   curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   vim +'PlugInstall! --sync' +'PlugUpdate!' +qa
@@ -126,14 +139,14 @@ apply_config() {
 }
 
 exit_fn() {
-  echo -e "${msg_text}! "
+  echo -e " ${msg_text}! "
   cd - > /dev/null || exit 1
   exit ${ERR_EXIT}
 }
 
 err_check() {
   if [[ ${ERR_EXIT} -eq 1 ]]; then
-    msg_text="something went wrong" 
+    msg_text="something went wrong " 
     exit_fn
   fi
 }
