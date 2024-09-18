@@ -174,6 +174,8 @@ bindsym $mod+Shift+h exec rofi -modi "clipboard:$HOME/.local/bin/greenclip print
 bindsym $mod+i exec setxkbmap -layout it
 bindsym $mod+u exec setxkbmap -layout us -option compose:rctrl
 
+bindsym $mod+Shift+p exec --no-startup-id flameshot gui
+
 # Bars and applets
 exec --no-startup-id $HOME/.config/i3/xrandr.sh &
 exec --no-startup-id $HOME/.config/polybar/launch.sh &

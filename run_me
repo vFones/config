@@ -121,8 +121,10 @@ apply_config() {
     ln -s -f -v $PWD/dotfiles/$HIDDENFILE $HOME/$HIDDENFILE
   done
 
-  # fzf-tab
+  wget --output-document ~/.config/delta/delta.styles https://raw.githubusercontent.com/dandavison/delta/master/themes.gitconfig
   git config --global core.pager "delta"
+  git config --global include.path "$HOME/.config/delta/delta.styles"
+  git config --global delta.features "gruvmax-fang"
   git config --global interactive.diffFilter "delta --color-only"
   git config --global delta.navigate true
   git config --global delta.side-by-side true
